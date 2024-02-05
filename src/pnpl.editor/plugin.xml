@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated pnpl -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="PNPL.presentation.PNPLModelWizardID"
+            name="%_UI_PNPLModelWizard_label"
+            class="PNPL.presentation.PNPLModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/PNPLModelFile.gif">
+         <description>%_UI_PNPLModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated pnpl -->
+      <editor
+            id="PNPL.presentation.PNPLEditorID"
+            name="%_UI_PNPLEditor_label"
+            icon="icons/full/obj16/PNPLModelFile.gif"
+            extensions="pnpl"
+            class="PNPL.presentation.PNPLEditor"
+            contributorClass="PNPL.presentation.PNPLActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>
