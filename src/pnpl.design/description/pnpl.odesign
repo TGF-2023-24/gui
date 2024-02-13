@@ -105,14 +105,14 @@
       <metamodel href="file:/D:/Ingenieria-Informatica/Cuarto/TFG/git/pnpl/model/pnpl.ecore#/"/>
       <defaultLayer name="Default">
         <nodeMappings name="Place" domainClass="PNPL::Place">
-          <style xsi:type="style:DotDescription" borderSizeComputationExpression="2" resizeKind="NSEW">
+          <style xsi:type="style:DotDescription" borderSizeComputationExpression="2" showIcon="false" resizeKind="NSEW">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
           </style>
         </nodeMappings>
         <nodeMappings name="Transition" domainClass="PNPL::Transition">
-          <style xsi:type="style:SquareDescription" resizeKind="NSEW" width="3" height="7">
+          <style xsi:type="style:SquareDescription" showIcon="false" resizeKind="NSEW" width="3" height="7">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
