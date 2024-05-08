@@ -2,9 +2,7 @@
 <description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" name="pnpl" version="12.0.0.2017041100">
   <ownedViewpoints name="pnpl-1" modelFileExtension="xmi">
     <ownedRepresentations xsi:type="description_1:DiagramDescription" name="Feature Model" initialisation="true" domainClass="PNPL::FeatureModel" enablePopupBars="true">
-      <metamodel href="file:/C:/Users/fmart/Desktop/UNI/6º/TFG/GUI/gui/ecore/pnplv.ecore#/"/>
       <metamodel href="http://www.petrinets.org/#/"/>
-      <metamodel href="file:/D:/Ingenieria-Informatica/Cuarto/TFG/git/gui/src/pnpl/model/pnpl.ecore#/"/>
       <defaultLayer name="Components">
         <nodeMappings name="OptionalNode" labelDirectEdit="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@toolSections.0/@ownedTools[name='editNodeName']" semanticCandidatesExpression="aql:self.featuremodel.nodes->select(p | p.mandatory=false)" domainClass="PNPL::Node">
           <style xsi:type="style:SquareDescription" showIcon="false" labelPosition="node" resizeKind="NSEW" width="12" height="4">
@@ -59,8 +57,8 @@
             <initialOperation>
               <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
                 <subModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::Node" referenceName="nodes">
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="mandatory" valueExpression="aql:false"/>
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'Node'+container.featuremodel.nodes->filter(PNPL::Node)->size()"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="mandatory" valueExpression="aql:mandatory=false"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'Node'+container.nodes->filter(PNPL::Node)->size()"/>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>
@@ -71,8 +69,8 @@
             <initialOperation>
               <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
                 <subModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::Node" referenceName="nodes">
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="mandatory" valueExpression="aql:true"/>
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'Node'+container.featuremodel.nodes->filter(PNPL::Node)->size()"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="mandatory" valueExpression="aql:mandatory=true"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'Node'+container.nodes->filter(PNPL::Node)->size()"/>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>
