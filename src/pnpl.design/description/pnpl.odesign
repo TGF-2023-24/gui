@@ -98,12 +98,25 @@
             <sourceViewVariable name="sourceView"/>
             <targetViewVariable name="targetView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.eContainer()">
-                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::Relation" referenceName="relations">
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self">
+                <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:not self.eContainer().relations->includes(self)">
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.eContainer()">
+                    <subModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::Relation" referenceName="relations">
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="Parent" valueExpression="var:source"/>
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="Childs" valueExpression="var:target"/>
+                      <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:target">
+                        <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="aql:source.requires"/>
+                        <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="var:source"/>
+                      </subModelOperations>
+                    </subModelOperations>
+                  </subModelOperations>
+                </subModelOperations>
+                <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:self.eContainer().relations->includes(self)">
                   <subModelOperations xsi:type="tool_1:SetValue" featureName="Parent" valueExpression="var:source"/>
                   <subModelOperations xsi:type="tool_1:SetValue" featureName="Childs" valueExpression="var:target"/>
                   <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:target">
                     <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="aql:source.requires"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="var:source"/>
                   </subModelOperations>
                 </subModelOperations>
               </firstModelOperations>
@@ -172,7 +185,7 @@
       </defaultLayer>
     </ownedRepresentations>
     <ownedRepresentations xsi:type="description_1:DiagramDescription" name="pn-150" domainClass="PNPL::PetriNet" enablePopupBars="true">
-      <metamodel href="file:/C:/Users/fmart/Desktop/UNI/6º/TFG/GUI/gui/src/pnpl/model/pnpl.ecore#/"/>
+      <metamodel href="file:/D:/Ingenieria-Informatica/Cuarto/TFG/git/gui/src/pnpl/model/pnpl.ecore#/"/>
       <defaultLayer name="Components" label="Components">
         <edgeMappings name="ArcTP" sourceMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@containerMappings[name='pn-150']/@subNodeMappings[name='Transition']" targetMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@containerMappings[name='pn-150']/@subNodeMappings[name='Place']" targetFinderExpression="feature:target" sourceFinderExpression="feature:source" domainClass="PNPL::ArcTP" useDomainElement="true">
           <style sizeComputationExpression="2">
@@ -229,7 +242,7 @@
       </defaultLayer>
     </ownedRepresentations>
     <ownedRepresentations xsi:type="description_2:EditionTableDescription" name="Presence Conditions" initialisation="true" showOnStartup="true" domainClass="PNPL::pnpl">
-      <metamodel href="file:/C:/Users/fmart/Desktop/UNI/6º/TFG/GUI/gui/src/pnpl/model/pnpl.ecore#/"/>
+      <metamodel href="file:/D:/Ingenieria-Informatica/Cuarto/TFG/git/gui/src/pnpl/model/pnpl.ecore#/"/>
       <ownedLineMappings name="Lines" domainClass="PNPL::PresenceCondition"/>
       <ownedColumnMappings name="Expression" headerLabelExpression="Expression" featureName="expression"/>
     </ownedRepresentations>
