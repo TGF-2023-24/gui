@@ -4,20 +4,6 @@
     <ownedRepresentations xsi:type="description_1:DiagramDescription" name="Feature Model" initialisation="true" domainClass="PNPL::FeatureModel" enablePopupBars="true">
       <metamodel href="http://www.petrinets.org/#/"/>
       <defaultLayer name="Components">
-        <nodeMappings name="OptionalNode" labelDirectEdit="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@toolSections.0/@ownedTools[name='editNodeName']" semanticCandidatesExpression="aql:self.featuremodel.nodes->select(p | p.mandatory=false)" domainClass="PNPL::Node">
-          <style xsi:type="style:SquareDescription" showIcon="false" labelPosition="node" resizeKind="NSEW" width="12" height="4">
-            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
-          </style>
-        </nodeMappings>
-        <nodeMappings name="MandatoryNode" labelDirectEdit="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@toolSections.0/@ownedTools[name='editNodeName']" semanticCandidatesExpression="aql:self.featuremodel.nodes->select(p | p.mandatory=true)" domainClass="PNPL::Node">
-          <style xsi:type="style:SquareDescription" showIcon="false" labelPosition="node" resizeKind="NSEW" width="12" height="4">
-            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
-          </style>
-        </nodeMappings>
         <edgeMappings name="OR-Relation" semanticCandidatesExpression="aql:self.featuremodel.relations->select(p | p.type = PNPL::RelationType::OR)" sourceMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@containerMappings[name='FeatureModel']/@subNodeMappings[name='MandatoryNode'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@containerMappings[name='FeatureModel']/@subNodeMappings[name='OptionalNode']" targetMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@containerMappings[name='FeatureModel']/@subNodeMappings[name='MandatoryNode'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@containerMappings[name='FeatureModel']/@subNodeMappings[name='OptionalNode']" targetFinderExpression="feature:Childs" sourceFinderExpression="feature:Parent" domainClass="PNPL::Relation" useDomainElement="true" reconnections="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@toolSections.0/@ownedTools[name='Edge%20Reconection']">
           <style sourceArrow="FillDiamond" targetArrow="NoDecoration" sizeComputationExpression="2">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -51,6 +37,12 @@
           </style>
         </edgeMappings>
         <containerMappings name="FeatureModel" synchronizationLock="true" domainClass="PNPL::FeatureModel">
+          <subNodeMappings name="Legend" domainClass="PNPL::FeatureModel">
+            <style xsi:type="style:WorkspaceImageDescription" showIcon="false" labelExpression="Legend" iconPath="/pnpl.design/icons/Legend-FeatureModel.png" hideLabelByDefault="true" sizeComputationExpression="10" resizeKind="NSEW" workspacePath="/pnpl.design/icons/Legend-FeatureModel.png">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </style>
+          </subNodeMappings>
           <subNodeMappings name="OptionalNode" labelDirectEdit="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@toolSections.0/@ownedTools[name='editNodeName']" semanticCandidatesExpression="aql:self.nodes->select(p | p.mandatory=false)" domainClass="PNPL::Node">
             <style xsi:type="style:SquareDescription" showIcon="false" labelPosition="node" resizeKind="NSEW" width="12" height="4">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -63,12 +55,6 @@
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
-            </style>
-          </subNodeMappings>
-          <subNodeMappings name="Legend" domainClass="PNPL::FeatureModel">
-            <style xsi:type="style:WorkspaceImageDescription" showIcon="false" labelExpression="Legend" iconPath="/pnpl.design/icons/Legend-FeatureModel.png" hideLabelByDefault="true" sizeComputationExpression="10" resizeKind="NSEW" workspacePath="/pnpl.design/icons/Legend-FeatureModel.png">
-              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             </style>
           </subNodeMappings>
           <style xsi:type="style:FlatContainerStyleDescription" arcWidth="0" arcHeight="0" labelSize="10" showIcon="false" labelExpression="Feature model" hideLabelByDefault="true" roundedCorner="true">
