@@ -185,7 +185,7 @@
       </defaultLayer>
     </ownedRepresentations>
     <ownedRepresentations xsi:type="description_1:DiagramDescription" name="pn-150" domainClass="PNPL::PetriNet" enablePopupBars="true">
-      <metamodel href="file:/D:/Ingenieria-Informatica/Cuarto/TFG/git/gui/src/pnpl/model/pnpl.ecore#/"/>
+      <metamodel href="file:/C:/Users/fmart/Desktop/UNI/6º/TFG/GUI/gui/src/pnpl/model/pnpl.ecore#/"/>
       <defaultLayer name="Components" label="Components">
         <edgeMappings name="ArcTP" sourceMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@containerMappings[name='pn-150']/@subNodeMappings[name='Transition']" targetMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@containerMappings[name='pn-150']/@subNodeMappings[name='Place']" targetFinderExpression="feature:target" sourceFinderExpression="feature:source" domainClass="PNPL::ArcTP" useDomainElement="true">
           <style sizeComputationExpression="2">
@@ -206,14 +206,14 @@
           </style>
         </edgeMappings>
         <containerMappings name="pn-150" synchronizationLock="true" domainClass="PNPL::PetriNet">
-          <subNodeMappings name="Place" domainClass="PNPL::Place">
+          <subNodeMappings name="Place" labelDirectEdit="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='editName']" domainClass="PNPL::Place">
             <style xsi:type="style:DotDescription" borderSizeComputationExpression="2" showIcon="false" resizeKind="NSEW">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
             </style>
           </subNodeMappings>
-          <subNodeMappings name="Transition" domainClass="PNPL::Transition">
+          <subNodeMappings name="Transition" labelDirectEdit="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='editName']" domainClass="PNPL::Transition">
             <style xsi:type="style:SquareDescription" showIcon="false" resizeKind="NSEW" width="3" height="7">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -238,11 +238,56 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="createTransition" inverseSelectionOrder="true" nodeMappings="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@containerMappings[name='pn-150']/@subNodeMappings[name='Transition']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::Transition" referenceName="elements">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'t_'+container.elements->filter(PNPL::Place)->size()"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:DirectEditLabel" name="editName" forceRefresh="true">
+            <mask mask="{0}"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="var:0"/>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="ArcTP Creation" precondition="aql:preTarget.differs(preSource)" forceRefresh="true" edgeMappings="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@edgeMappings[name='ArcTP']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.eContainer()">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::ArcTP" referenceName="elements">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="source" valueExpression="var:source"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="target" valueExpression="var:target"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="weight" valueExpression="1"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="ArcPT Creation" precondition="aql:preTarget.differs(preSource)" forceRefresh="true" edgeMappings="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@edgeMappings[name='ArcPT']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.eContainer()">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::ArcPT" referenceName="elements">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="source" valueExpression="var:source"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="target" valueExpression="var:target"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="weight" valueExpression="1"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
         </toolSections>
       </defaultLayer>
     </ownedRepresentations>
     <ownedRepresentations xsi:type="description_2:EditionTableDescription" name="Presence Conditions" initialisation="true" showOnStartup="true" domainClass="PNPL::pnpl">
-      <metamodel href="file:/D:/Ingenieria-Informatica/Cuarto/TFG/git/gui/src/pnpl/model/pnpl.ecore#/"/>
+      <metamodel href="file:/C:/Users/fmart/Desktop/UNI/6º/TFG/GUI/gui/src/pnpl/model/pnpl.ecore#/"/>
       <ownedLineMappings name="Lines" domainClass="PNPL::PresenceCondition"/>
       <ownedColumnMappings name="Expression" headerLabelExpression="Expression" featureName="expression"/>
     </ownedRepresentations>
