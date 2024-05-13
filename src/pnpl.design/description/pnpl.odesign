@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" name="pnpl" version="12.0.0.2017041100">
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:description_2="http://www.eclipse.org/sirius/table/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" name="pnpl" version="12.0.0.2017041100">
   <ownedViewpoints name="pnpl-1" modelFileExtension="xmi">
     <ownedRepresentations xsi:type="description_1:DiagramDescription" name="Feature Model" initialisation="true" domainClass="PNPL::FeatureModel" enablePopupBars="true">
       <metamodel href="http://www.petrinets.org/#/"/>
       <defaultLayer name="Components">
+<<<<<<< Updated upstream
         <nodeMappings name="OptionalNode" labelDirectEdit="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@toolSections.0/@ownedTools[name='editNodeName']" semanticCandidatesExpression="aql:self.featuremodel.nodes->select(p | p.mandatory=false)" domainClass="PNPL::Node">
           <style xsi:type="style:SquareDescription" showIcon="false" labelPosition="node" resizeKind="NSEW" width="12" height="4">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -19,6 +20,9 @@
           </style>
         </nodeMappings>
         <edgeMappings name="OR-Relation" semanticCandidatesExpression="aql:self.featuremodel.relations->select(p | p.type = PNPL::RelationType::OR)" sourceMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@nodeMappings[name='MandatoryNode'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@nodeMappings[name='OptionalNode']" targetMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@nodeMappings[name='MandatoryNode'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@nodeMappings[name='OptionalNode']" targetFinderExpression="feature:Childs" sourceFinderExpression="feature:Parent" domainClass="PNPL::Relation" useDomainElement="true">
+=======
+        <edgeMappings name="OR-Relation" semanticCandidatesExpression="aql:self.featuremodel.relations->select(p | p.type = PNPL::RelationType::OR)" sourceMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@containerMappings[name='FeatureModel']/@subNodeMappings[name='MandatoryNode'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@containerMappings[name='FeatureModel']/@subNodeMappings[name='OptionalNode']" targetMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@containerMappings[name='FeatureModel']/@subNodeMappings[name='MandatoryNode'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@containerMappings[name='FeatureModel']/@subNodeMappings[name='OptionalNode']" targetFinderExpression="feature:Childs" sourceFinderExpression="feature:Parent" domainClass="PNPL::Relation" useDomainElement="true" reconnections="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@toolSections.0/@ownedTools[name='Edge%20Reconection']">
+>>>>>>> Stashed changes
           <style sourceArrow="FillDiamond" targetArrow="NoDecoration" sizeComputationExpression="2">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <centerLabelStyleDescription>
@@ -26,7 +30,11 @@
             </centerLabelStyleDescription>
           </style>
         </edgeMappings>
+<<<<<<< Updated upstream
         <edgeMappings name="ANDMandatory-Relation" semanticCandidatesExpression="aql:self.featuremodel.relations->select(p | p.type = PNPL::RelationType::AND)" sourceMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@nodeMappings[name='MandatoryNode'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@nodeMappings[name='OptionalNode']" targetMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@nodeMappings[name='MandatoryNode']" targetFinderExpression="feature:Childs" sourceFinderExpression="feature:Parent" domainClass="PNPL::Relation" useDomainElement="true">
+=======
+        <edgeMappings name="ANDMandatory-Relation" semanticCandidatesExpression="aql:self.featuremodel.relations->select(p | p.type = PNPL::RelationType::AND)" sourceMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@containerMappings[name='FeatureModel']/@subNodeMappings[name='MandatoryNode'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@containerMappings[name='FeatureModel']/@subNodeMappings[name='OptionalNode']" targetMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@containerMappings[name='FeatureModel']/@subNodeMappings[name='MandatoryNode']" targetFinderExpression="feature:Childs" sourceFinderExpression="feature:Parent" domainClass="PNPL::Relation" useDomainElement="true" reconnections="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@toolSections.0/@ownedTools[name='Edge%20Reconection']">
+>>>>>>> Stashed changes
           <style targetArrow="FillDiamond" sizeComputationExpression="2">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <centerLabelStyleDescription>
@@ -34,7 +42,11 @@
             </centerLabelStyleDescription>
           </style>
         </edgeMappings>
+<<<<<<< Updated upstream
         <edgeMappings name="ANDOptional-Relation" semanticCandidatesExpression="aql:self.featuremodel.relations->select(p | p.type = PNPL::RelationType::AND)" sourceMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@nodeMappings[name='MandatoryNode'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@nodeMappings[name='OptionalNode']" targetMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@nodeMappings[name='OptionalNode']" targetFinderExpression="feature:Childs" sourceFinderExpression="feature:Parent" domainClass="PNPL::Relation" useDomainElement="true">
+=======
+        <edgeMappings name="ANDOptional-Relation" semanticCandidatesExpression="aql:self.featuremodel.relations->select(p | p.type = PNPL::RelationType::AND)" sourceMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@containerMappings[name='FeatureModel']/@subNodeMappings[name='MandatoryNode'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@containerMappings[name='FeatureModel']/@subNodeMappings[name='OptionalNode']" targetMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@containerMappings[name='FeatureModel']/@subNodeMappings[name='OptionalNode']" targetFinderExpression="feature:Childs" sourceFinderExpression="feature:Parent" domainClass="PNPL::Relation" useDomainElement="true" reconnections="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@toolSections.0/@ownedTools[name='Edge%20Reconection']">
+>>>>>>> Stashed changes
           <style targetArrow="Diamond" sizeComputationExpression="2">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <centerLabelStyleDescription>
@@ -42,7 +54,7 @@
             </centerLabelStyleDescription>
           </style>
         </edgeMappings>
-        <edgeMappings name="ALTERNTAIVE-Relation" semanticCandidatesExpression="aql:self.featuremodel.relations->select(p | p.type = PNPL::RelationType::ALTERNATIVE)" targetFinderExpression="feature:Childs" sourceFinderExpression="feature:Parent" domainClass="PNPL::Relation" useDomainElement="true">
+        <edgeMappings name="ALTERNATIVE-Relation" semanticCandidatesExpression="aql:self.featuremodel.relations->select(p | p.type = PNPL::RelationType::ALTERNATIVE)" sourceMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@containerMappings[name='FeatureModel']/@subNodeMappings[name='MandatoryNode'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@containerMappings[name='FeatureModel']/@subNodeMappings[name='OptionalNode']" targetMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@containerMappings[name='FeatureModel']/@subNodeMappings[name='OptionalNode'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@containerMappings[name='FeatureModel']/@subNodeMappings[name='MandatoryNode']" targetFinderExpression="feature:Childs" sourceFinderExpression="feature:Parent" domainClass="PNPL::Relation" useDomainElement="true" reconnections="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@toolSections.0/@ownedTools[name='Edge%20Reconection']">
           <style sourceArrow="Diamond" targetArrow="NoDecoration" sizeComputationExpression="2">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <centerLabelStyleDescription>
@@ -50,26 +62,72 @@
             </centerLabelStyleDescription>
           </style>
         </edgeMappings>
+<<<<<<< Updated upstream
         <toolSections name="Create/Edit">
           <ownedTools xsi:type="tool:NodeCreationDescription" name="createOptionalNode" forceRefresh="true" nodeMappings="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@nodeMappings[name='OptionalNode']">
+=======
+        <containerMappings name="FeatureModel" synchronizationLock="true" domainClass="PNPL::FeatureModel">
+          <subNodeMappings name="OptionalNode" labelDirectEdit="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@toolSections.0/@ownedTools[name='editNodeName']" semanticCandidatesExpression="aql:self.nodes->select(p | p.mandatory=false)" domainClass="PNPL::Node">
+            <style xsi:type="style:SquareDescription" showIcon="false" labelPosition="node" resizeKind="NSEW" width="12" height="4">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+            </style>
+          </subNodeMappings>
+          <subNodeMappings name="MandatoryNode" labelDirectEdit="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@toolSections.0/@ownedTools[name='editNodeName']" semanticCandidatesExpression="aql:self.nodes->select(p | p.mandatory=true)" domainClass="PNPL::Node">
+            <style xsi:type="style:SquareDescription" showIcon="false" labelPosition="node" resizeKind="NSEW" width="12" height="4">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+            </style>
+          </subNodeMappings>
+          <subNodeMappings name="Legend" domainClass="PNPL::FeatureModel">
+            <style xsi:type="style:WorkspaceImageDescription" showIcon="false" labelExpression="Legend" iconPath="/pnpl.design/icons/Legend-FeatureModel.png" hideLabelByDefault="true" sizeComputationExpression="10" resizeKind="NSEW" workspacePath="/pnpl.design/icons/Legend-FeatureModel.png">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </style>
+          </subNodeMappings>
+          <style xsi:type="style:FlatContainerStyleDescription" arcWidth="0" arcHeight="0" labelSize="10" showIcon="false" labelExpression="Feature model" hideLabelByDefault="true" roundedCorner="true">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            <labelFormat>bold</labelFormat>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+          </style>
+        </containerMappings>
+        <toolSections name="Create/Edit">
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="OptionalNode Creation" forceRefresh="true" nodeMappings="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@containerMappings[name='FeatureModel']/@subNodeMappings[name='OptionalNode']">
+>>>>>>> Stashed changes
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
                 <subModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::Node" referenceName="nodes">
+<<<<<<< Updated upstream
                   <subModelOperations xsi:type="tool_1:SetValue" featureName="mandatory" valueExpression="aql:mandatory=false"/>
+=======
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="mandatory" valueExpression="aql:false"/>
+>>>>>>> Stashed changes
                   <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'Node'+container.nodes->filter(PNPL::Node)->size()"/>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
+<<<<<<< Updated upstream
           <ownedTools xsi:type="tool:NodeCreationDescription" name="createMandatoryNode" forceRefresh="true" nodeMappings="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@nodeMappings[name='MandatoryNode']">
+=======
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="MandatoryNode Creation" forceRefresh="true" nodeMappings="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@containerMappings[name='FeatureModel']/@subNodeMappings[name='MandatoryNode']">
+>>>>>>> Stashed changes
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
                 <subModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::Node" referenceName="nodes">
+<<<<<<< Updated upstream
                   <subModelOperations xsi:type="tool_1:SetValue" featureName="mandatory" valueExpression="aql:mandatory=true"/>
+=======
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="mandatory" valueExpression="aql:true"/>
+>>>>>>> Stashed changes
                   <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'Node'+container.nodes->filter(PNPL::Node)->size()"/>
                 </subModelOperations>
               </firstModelOperations>
@@ -81,16 +139,75 @@
               <firstModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="var:0"/>
             </initialOperation>
           </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="OR-Relation Creation" precondition="aql:preTarget.differs(preSource)" forceRefresh="true" edgeMappings="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@edgeMappings[name='OR-Relation']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.eContainer()">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::Relation" referenceName="relations">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="Parent" valueExpression="var:source"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="Childs" valueExpression="var:target"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="ANDMandatory-Relation Creation" precondition="aql:preTarget.differs(preSource)" forceRefresh="true" edgeMappings="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@edgeMappings[name='ANDMandatory-Relation']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.eContainer()">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::Relation" referenceName="relations">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="Parent" valueExpression="var:source"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="Childs" valueExpression="var:target"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="ANDOptional-Relation Creation" precondition="aql:preTarget.differs(preSource)" forceRefresh="true" edgeMappings="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@edgeMappings[name='ANDOptional-Relation']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.eContainer()">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::Relation" referenceName="relations">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="Parent" valueExpression="var:source"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="Childs" valueExpression="var:target"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="ALTERNATIVE-Relation Creation" precondition="aql:preTarget.differs(preSource)" forceRefresh="true" edgeMappings="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@edgeMappings[name='ANDOptional-Relation']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.eContainer()">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::Relation" referenceName="relations">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="Parent" valueExpression="var:source"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="Childs" valueExpression="var:target"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ReconnectEdgeDescription" name="Edge Reconection" forceRefresh="true">
+            <source name="source"/>
+            <target name="target"/>
+            <sourceView name="sourceView"/>
+            <targetView name="targetView"/>
+            <element name="element"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:element"/>
+            </initialOperation>
+            <edgeView name="edgeView"/>
+          </ownedTools>
         </toolSections>
       </defaultLayer>
-      <additionalLayers name="Legend" activeByDefault="true">
-        <nodeMappings name="Legend" domainClass="PNPL::FeatureModel">
-          <style xsi:type="style:WorkspaceImageDescription" showIcon="false" labelExpression="Legend" iconPath="/pnpl.design/icons/Legend-FeatureModel.png" hideLabelByDefault="true" sizeComputationExpression="10" resizeKind="NSEW" workspacePath="/pnpl.design/icons/Legend-FeatureModel.png">
-            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-          </style>
-        </nodeMappings>
-      </additionalLayers>
     </ownedRepresentations>
     <ownedRepresentations xsi:type="description_1:DiagramDescription" name="pn-150" domainClass="PNPL::PetriNet" enablePopupBars="true">
       <metamodel href="file:/C:/Users/fmart/Desktop/UNI/6º/TFG/GUI/gui/ecore/pnplv.ecore#/"/>
@@ -112,7 +229,8 @@
         <edgeMappings name="ArcTP" sourceMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@nodeMappings[name='Transition']" targetMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@nodeMappings[name='Place']" targetFinderExpression="feature:target" sourceFinderExpression="feature:source" domainClass="PNPL::ArcTP" useDomainElement="true">
           <style sizeComputationExpression="2">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
-            <centerLabelStyleDescription>
+            <centerLabelStyleDescription showIcon="false" labelExpression="aql:self.weight">
+              <labelFormat>bold</labelFormat>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             </centerLabelStyleDescription>
           </style>
@@ -120,7 +238,8 @@
         <edgeMappings name="ArcPT" sourceMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@nodeMappings[name='Place']" targetMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@nodeMappings[name='Transition']" targetFinderExpression="feature:target" sourceFinderExpression="feature:source" domainClass="PNPL::ArcPT" useDomainElement="true">
           <style sizeComputationExpression="2">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
-            <centerLabelStyleDescription>
+            <centerLabelStyleDescription showIcon="false" labelExpression="aql:self.weight">
+              <labelFormat>bold</labelFormat>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             </centerLabelStyleDescription>
           </style>
@@ -139,6 +258,10 @@
           </ownedTools>
         </toolSections>
       </defaultLayer>
+    </ownedRepresentations>
+    <ownedRepresentations xsi:type="description_2:EditionTableDescription" name="Presence Conditions" initialisation="true" showOnStartup="true" domainClass="PNPL::pnpl">
+      <ownedLineMappings name="Lines" domainClass="PNPL::PresenceCondition"/>
+      <ownedColumnMappings name="Expression" headerLabelExpression="Expression" featureName="expression"/>
     </ownedRepresentations>
   </ownedViewpoints>
 </description:Group>
