@@ -234,7 +234,7 @@
             <viewVariable name="containerView"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::Place" referenceName="elements">
-                <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'t_'+container.elements->filter(PNPL::Place)->size()"/>
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'p_'+container.elements->filter(PNPL::Place)->size()"/>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
