@@ -219,6 +219,15 @@
             </centerLabelStyleDescription>
           </style>
         </edgeMappings>
+        <containerMappings name="PresenceConditions" domainClass="PNPL::PresenceCondition">
+          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="3" borderLineStyle="dot" labelExpression="feature:id" labelAlignment="LEFT" widthComputationExpression="5" heightComputationExpression="5" backgroundStyle="Liquid">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_red']"/>
+            <labelFormat>italic</labelFormat>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+          </style>
+        </containerMappings>
         <toolSections name="Creation">
           <ownedTools xsi:type="tool:NodeCreationDescription" name="createPlace" forceRefresh="true" nodeMappings="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@nodeMappings[name='Place']">
             <variable name="container"/>
