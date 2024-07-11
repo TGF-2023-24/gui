@@ -99,27 +99,33 @@
             <targetViewVariable name="targetView"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self">
-                <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:not self.eContainer().relations->exists(p | p.Parent=source)">
-                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.eContainer()">
-                    <subModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::Relation" referenceName="relations">
-                      <subModelOperations xsi:type="tool_1:SetValue" featureName="Parent" valueExpression="var:source"/>
-                      <subModelOperations xsi:type="tool_1:SetValue" featureName="Childs" valueExpression="var:target"/>
-                      <subModelOperations xsi:type="tool_1:SetValue" featureName="type" valueExpression="aql:PNPL::RelationType::OR"/>
-                      <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:target">
-                        <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="aql:source.requires"/>
-                        <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="var:source"/>
+                <subModelOperations xsi:type="tool_1:Switch">
+                  <cases conditionExpression="aql:self.eContainer().relations->exists(p | p.Parent=source)">
+                    <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.eContainer().relations->select(p | p.Parent=)">
+                      <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.eContainer().relations->select(p | p.Parent=preSource)">
+                        <subModelOperations xsi:type="tool_1:SetValue" featureName="Childs" valueExpression="var:target"/>
                       </subModelOperations>
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="Childs" valueExpression="var:target"/>
                     </subModelOperations>
-                  </subModelOperations>
-                </subModelOperations>
-                <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:self.eContainer().relations->exists(p | p.Parent=source)">
-                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.eContainer().relations->select(p | p.Parent=source)">
-                    <subModelOperations xsi:type="tool_1:SetValue" featureName="Childs" valueExpression="var:target"/>
                     <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:target">
                       <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="aql:source.requires"/>
                       <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="var:source"/>
                     </subModelOperations>
-                  </subModelOperations>
+                  </cases>
+                  <cases conditionExpression="aql:not self.eContainer().relations->exists(p | p.Parent=source)">
+                    <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.eContainer()">
+                      <subModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::Relation" referenceName="relations">
+                        <subModelOperations xsi:type="tool_1:SetValue" featureName="Parent" valueExpression="var:source"/>
+                        <subModelOperations xsi:type="tool_1:SetValue" featureName="Childs" valueExpression="var:target"/>
+                        <subModelOperations xsi:type="tool_1:SetValue" featureName="type" valueExpression="aql:PNPL::RelationType::OR"/>
+                        <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:target">
+                          <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="aql:source.requires"/>
+                          <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="var:source"/>
+                        </subModelOperations>
+                      </subModelOperations>
+                    </subModelOperations>
+                  </cases>
+                  <default/>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>
@@ -181,7 +187,7 @@
       </defaultLayer>
     </ownedRepresentations>
     <ownedRepresentations xsi:type="description_1:DiagramDescription" name="pn-150" domainClass="PNPL::PetriNet" enablePopupBars="true">
-      <metamodel href="file:/C:/Users/fmart/Desktop/UNI/6º/TFG/GUI/gui/src/pnpl/model/pnpl.ecore#/"/>
+      <metamodel href="file:/D:/Ingenieria-Informatica/Cuarto/TFG/git/gui/src/pnpl/model/pnpl.ecore#/"/>
       <defaultLayer name="Components" label="Components">
         <nodeMappings name="Place" labelDirectEdit="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='editName']" semanticCandidatesExpression="aql:self.eContainer().pn_150.elements->select(e | e.presenceCondition = null)" domainClass="PNPL::Place">
           <style xsi:type="style:DotDescription" borderSizeComputationExpression="2" showIcon="false" resizeKind="NSEW">
@@ -230,12 +236,12 @@
               <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             </style>
           </subNodeMappings>
-          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="3" borderLineStyle="dot" labelExpression="feature:id" labelAlignment="LEFT" widthComputationExpression="5" heightComputationExpression="5" backgroundStyle="Liquid">
+          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="3" borderLineStyle="dot" showIcon="false" labelExpression="feature:id">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_red']"/>
             <labelFormat>italic</labelFormat>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
-            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
           </style>
         </containerMappings>
         <toolSections name="Creation">
