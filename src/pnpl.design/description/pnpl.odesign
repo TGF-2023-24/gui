@@ -250,7 +250,7 @@
       <metamodel href="file:/D:/Ingenieria-Informatica/Cuarto/TFG/git/gui/src/pnpl/model/pnpl.ecore#/"/>
       <defaultLayer name="Components" label="Components">
         <nodeMappings name="Place" labelDirectEdit="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='editName']" semanticCandidatesExpression="aql:self.eContainer().pn_150.elements->select(e | e.presenceCondition = null)" domainClass="PNPL::Place">
-          <style xsi:type="style:DotDescription" borderSizeComputationExpression="2" showIcon="false" resizeKind="NSEW">
+          <style xsi:type="style:DotDescription" borderSizeComputationExpression="2" showIcon="false" labelAlignment="RIGHT" resizeKind="NSEW">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
@@ -305,7 +305,7 @@
           </style>
         </containerMappings>
         <toolSections name="Creation">
-          <ownedTools xsi:type="tool:NodeCreationDescription" name="createPlace" forceRefresh="true" nodeMappings="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@containerMappings[name='PresenceConditions']/@subNodeMappings[name='PlacePc']">
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="createPlace" forceRefresh="true" nodeMappings="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@containerMappings[name='PresenceConditions']/@subNodeMappings[name='PlacePc'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@nodeMappings[name='Place']">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
@@ -314,7 +314,7 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:NodeCreationDescription" name="createTransition" inverseSelectionOrder="true" nodeMappings="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@containerMappings[name='PresenceConditions']/@subNodeMappings[name='TransitionPc']">
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="createTransition" inverseSelectionOrder="true" nodeMappings="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@containerMappings[name='PresenceConditions']/@subNodeMappings[name='TransitionPc'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@nodeMappings[name='Transition']">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
