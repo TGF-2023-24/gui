@@ -98,30 +98,27 @@
             <sourceViewVariable name="sourceView"/>
             <targetViewVariable name="targetView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self">
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.eContainer()">
                 <subModelOperations xsi:type="tool_1:Switch">
-                  <cases conditionExpression="aql:self.eContainer().relations->exists(p | p.Parent=source)">
-                    <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.eContainer().relations->select(p | p.Parent=)">
+                  <cases conditionExpression="aql:self.relations->exists(p | p.Parent=source and p.type = PNPL::RelationType::OR)">
+                    <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.relations->select(p | p.Parent=source)->first()">
                       <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.eContainer().relations->select(p | p.Parent=preSource)">
                         <subModelOperations xsi:type="tool_1:SetValue" featureName="Childs" valueExpression="var:target"/>
                       </subModelOperations>
-                      <subModelOperations xsi:type="tool_1:SetValue" featureName="Childs" valueExpression="var:target"/>
                     </subModelOperations>
                     <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:target">
                       <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="aql:source.requires"/>
                       <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="var:source"/>
                     </subModelOperations>
                   </cases>
-                  <cases conditionExpression="aql:not self.eContainer().relations->exists(p | p.Parent=source)">
-                    <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.eContainer()">
-                      <subModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::Relation" referenceName="relations">
-                        <subModelOperations xsi:type="tool_1:SetValue" featureName="Parent" valueExpression="var:source"/>
-                        <subModelOperations xsi:type="tool_1:SetValue" featureName="Childs" valueExpression="var:target"/>
-                        <subModelOperations xsi:type="tool_1:SetValue" featureName="type" valueExpression="aql:PNPL::RelationType::OR"/>
-                        <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:target">
-                          <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="aql:source.requires"/>
-                          <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="var:source"/>
-                        </subModelOperations>
+                  <cases conditionExpression="aql:not self.relations->exists(p | p.Parent=source)">
+                    <subModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::Relation" referenceName="relations">
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="Parent" valueExpression="var:source"/>
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="Childs" valueExpression="var:target"/>
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="type" valueExpression="aql:PNPL::RelationType::OR"/>
+                      <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:target">
+                        <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="aql:source.requires"/>
+                        <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="var:source"/>
                       </subModelOperations>
                     </subModelOperations>
                   </cases>
@@ -137,9 +134,30 @@
             <targetViewVariable name="targetView"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.eContainer()">
-                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::Relation" referenceName="relations">
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="Parent" valueExpression="var:source"/>
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="Childs" valueExpression="var:target"/>
+                <subModelOperations xsi:type="tool_1:Switch">
+                  <cases conditionExpression="aql:self.relations->exists(p | p.Parent=source and p.type = PNPL::RelationType::AND)">
+                    <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.relations->select(p | p.Parent=source)->first()">
+                      <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.eContainer().relations->select(p | p.Parent=preSource)">
+                        <subModelOperations xsi:type="tool_1:SetValue" featureName="Childs" valueExpression="var:target"/>
+                      </subModelOperations>
+                    </subModelOperations>
+                    <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:target">
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="aql:source.requires"/>
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="var:source"/>
+                    </subModelOperations>
+                  </cases>
+                  <cases conditionExpression="aql:not self.relations->exists(p | p.Parent=source)">
+                    <subModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::Relation" referenceName="relations">
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="Parent" valueExpression="var:source"/>
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="Childs" valueExpression="var:target"/>
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="type" valueExpression="aql:PNPL::RelationType::AND"/>
+                      <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:target">
+                        <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="aql:source.requires"/>
+                        <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="var:source"/>
+                      </subModelOperations>
+                    </subModelOperations>
+                  </cases>
+                  <default/>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>
@@ -151,23 +169,65 @@
             <targetViewVariable name="targetView"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.eContainer()">
-                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::Relation" referenceName="relations">
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="Parent" valueExpression="var:source"/>
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="Childs" valueExpression="var:target"/>
+                <subModelOperations xsi:type="tool_1:Switch">
+                  <cases conditionExpression="aql:self.relations->exists(p | p.Parent=source and p.type = PNPL::RelationType::AND)">
+                    <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.relations->select(p | p.Parent=source)->first()">
+                      <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.eContainer().relations->select(p | p.Parent=preSource)">
+                        <subModelOperations xsi:type="tool_1:SetValue" featureName="Childs" valueExpression="var:target"/>
+                      </subModelOperations>
+                    </subModelOperations>
+                    <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:target">
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="aql:source.requires"/>
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="var:source"/>
+                    </subModelOperations>
+                  </cases>
+                  <cases conditionExpression="aql:not self.relations->exists(p | p.Parent=source)">
+                    <subModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::Relation" referenceName="relations">
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="Parent" valueExpression="var:source"/>
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="Childs" valueExpression="var:target"/>
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="type" valueExpression="aql:PNPL::RelationType::AND"/>
+                      <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:target">
+                        <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="aql:source.requires"/>
+                        <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="var:source"/>
+                      </subModelOperations>
+                    </subModelOperations>
+                  </cases>
+                  <default/>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:EdgeCreationDescription" name="ALTERNATIVE-Relation Creation" precondition="aql:preTarget.differs(preSource)" forceRefresh="true" edgeMappings="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@edgeMappings[name='ANDOptional-Relation']">
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="ALTERNATIVE-Relation Creation" precondition="aql:preTarget.differs(preSource)" forceRefresh="true" edgeMappings="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@edgeMappings[name='ALTERNATIVE-Relation']">
             <sourceVariable name="source"/>
             <targetVariable name="target"/>
             <sourceViewVariable name="sourceView"/>
             <targetViewVariable name="targetView"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.eContainer()">
-                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::Relation" referenceName="relations">
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="Parent" valueExpression="var:source"/>
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="Childs" valueExpression="var:target"/>
+                <subModelOperations xsi:type="tool_1:Switch">
+                  <cases conditionExpression="aql:self.relations->exists(p | p.Parent=source and p.type = PNPL::RelationType::ALTERNATIVE)">
+                    <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.relations->select(p | p.Parent=source)->first()">
+                      <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.eContainer().relations->select(p | p.Parent=preSource)">
+                        <subModelOperations xsi:type="tool_1:SetValue" featureName="Childs" valueExpression="var:target"/>
+                      </subModelOperations>
+                    </subModelOperations>
+                    <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:target">
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="aql:source.requires"/>
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="var:source"/>
+                    </subModelOperations>
+                  </cases>
+                  <cases conditionExpression="aql:not self.relations->exists(p | p.Parent=source)">
+                    <subModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::Relation" referenceName="relations">
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="Parent" valueExpression="var:source"/>
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="Childs" valueExpression="var:target"/>
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="type" valueExpression="aql:PNPL::RelationType::ALTERNATIVE"/>
+                      <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:target">
+                        <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="aql:source.requires"/>
+                        <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="var:source"/>
+                      </subModelOperations>
+                    </subModelOperations>
+                  </cases>
+                  <default/>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>
