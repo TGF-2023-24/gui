@@ -7,4 +7,10 @@
 	       name="pnpl">
     </component>
   </extension>
+  <extension
+        point="org.eclipse.sirius.featureExtensions">
+     <feature
+           class="pnpl.design.Services">
+     </feature>
+  </extension>
 </plugin>
