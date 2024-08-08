@@ -10,14 +10,14 @@
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
           </style>
         </nodeMappings>
-        <nodeMappings name="OptionalNode" labelDirectEdit="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@toolSections.0/@ownedTools[name='editNodeName']" semanticCandidatesExpression="aql:self.nodes->select(p | p.mandatory=false)" domainClass="PNPL::Node">
+        <nodeMappings name="OptionalNode" deletionDescription="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@toolSections.0/@ownedTools[name='Delete%20Node']" labelDirectEdit="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@toolSections.0/@ownedTools[name='editNodeName']" semanticCandidatesExpression="aql:self.nodes->select(p | p.mandatory=false)" domainClass="PNPL::Node">
           <style xsi:type="style:SquareDescription" showIcon="false" labelPosition="node" resizeKind="NSEW" width="12" height="4">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
           </style>
         </nodeMappings>
-        <nodeMappings name="MandatoryNode" labelDirectEdit="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@toolSections.0/@ownedTools[name='editNodeName']" semanticCandidatesExpression="aql:self.nodes->select(p | p.mandatory=true)" domainClass="PNPL::Node">
+        <nodeMappings name="MandatoryNode" deletionDescription="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@toolSections.0/@ownedTools[name='Delete%20Node']" labelDirectEdit="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@toolSections.0/@ownedTools[name='editNodeName']" semanticCandidatesExpression="aql:self.nodes->select(p | p.mandatory=true)" domainClass="PNPL::Node">
           <style xsi:type="style:SquareDescription" showIcon="false" labelPosition="node" resizeKind="NSEW" width="12" height="4">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -240,6 +240,23 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
+          <ownedTools xsi:type="tool:DeleteElementDescription" name="Delete Node">
+            <element name="element"/>
+            <elementView name="elementView"/>
+            <containerView name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:element">
+                <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:element.eContainer().relations->exists(p|p.Childs->exists(myNode | myNode=element))">
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:element.eContainer().relations->select(p|p.Childs->exists(myNode | myNode=element))">
+                    <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:self->size()=1">
+                      <subModelOperations xsi:type="tool_1:RemoveElement"/>
+                    </subModelOperations>
+                  </subModelOperations>
+                </subModelOperations>
+                <subModelOperations xsi:type="tool_1:RemoveElement"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
           <ownedTools xsi:type="tool:ReconnectEdgeDescription" name="Reconnect Father" forceRefresh="true" reconnectionKind="RECONNECT_SOURCE">
             <source name="source"/>
             <target name="target"/>
@@ -247,21 +264,23 @@
             <targetView name="targetView"/>
             <element name="element"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:otherEnd">
-                <subModelOperations xsi:type="tool_1:For" expression="aql:element.Childs" iteratorName="child">
-                  <subModelOperations xsi:type="tool_1:For" expression="aql:child.requires">
-                    <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:child">
-                      <subModelOperations xsi:type="tool_1:Unset" featureName="requires" elementExpression="aql:self.requires->last()"/>
+              <firstModelOperations xsi:type="tool_1:If" conditionExpression="aql:not element.eContainer().relations->exists(p|p.Parent=target)">
+                <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:otherEnd">
+                  <subModelOperations xsi:type="tool_1:For" expression="aql:element.Childs" iteratorName="child">
+                    <subModelOperations xsi:type="tool_1:For" expression="aql:child.requires">
+                      <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:child">
+                        <subModelOperations xsi:type="tool_1:Unset" featureName="requires" elementExpression="aql:self.requires->last()"/>
+                      </subModelOperations>
+                    </subModelOperations>
+                    <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aqlchild">
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="aql:target.requires"/>
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="var:target"/>
                     </subModelOperations>
                   </subModelOperations>
-                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aqlchild">
-                    <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="aql:target.requires"/>
-                    <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="var:target"/>
-                  </subModelOperations>
-                </subModelOperations>
-                <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:element">
-                  <subModelOperations xsi:type="tool_1:Unset" featureName="Parent" elementExpression="var:source">
-                    <subModelOperations xsi:type="tool_1:SetValue" featureName="Parent" valueExpression="var:target"/>
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:element">
+                    <subModelOperations xsi:type="tool_1:Unset" featureName="Parent" elementExpression="var:source">
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="Parent" valueExpression="var:target"/>
+                    </subModelOperations>
                   </subModelOperations>
                 </subModelOperations>
               </firstModelOperations>
@@ -275,16 +294,18 @@
             <targetView name="targetView"/>
             <element name="element"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:element">
-                <subModelOperations xsi:type="tool_1:Unset" featureName="Childs" elementExpression="var:source"/>
-                <subModelOperations xsi:type="tool_1:SetValue" featureName="Childs" valueExpression="var:target"/>
-                <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:target">
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="aql:source.requires"/>
-                </subModelOperations>
-                <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:source">
-                  <subModelOperations xsi:type="tool_1:For" expression="aql:self.requires">
-                    <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:source">
-                      <subModelOperations xsi:type="tool_1:Unset" featureName="requires" elementExpression="aql:self.requires->last()"/>
+              <firstModelOperations xsi:type="tool_1:If" conditionExpression="aql:not element.eContainer().relations->exists(p|p.Childs->exists(myNode | myNode=target))">
+                <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:element">
+                  <subModelOperations xsi:type="tool_1:Unset" featureName="Childs" elementExpression="var:source"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="Childs" valueExpression="var:target"/>
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:target">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="aql:source.requires"/>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:source">
+                    <subModelOperations xsi:type="tool_1:For" expression="aql:self.requires">
+                      <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:source">
+                        <subModelOperations xsi:type="tool_1:Unset" featureName="requires" elementExpression="aql:self.requires->last()"/>
+                      </subModelOperations>
                     </subModelOperations>
                   </subModelOperations>
                 </subModelOperations>
