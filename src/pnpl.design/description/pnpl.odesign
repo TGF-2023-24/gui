@@ -512,6 +512,15 @@
     <ownedRepresentations xsi:type="description_2:EditionTableDescription" name="Presence Conditions" initialisation="true" showOnStartup="true" domainClass="PNPL::pnpl">
       <metamodel href="file:/C:/Users/fmart/Desktop/UNI/6º/TFG/GUI/gui/src/pnpl/model/pnpl.ecore#/"/>
       <ownedLineMappings name="Lines" domainClass="PNPL::PresenceCondition"/>
+      <ownedCreateLine name="createPC" label="New Presence Condition" forceRefresh="true" mapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Presence%20Conditions']/@ownedLineMappings[name='Lines']">
+        <variables name="root" documentation="The semantic root element of the table."/>
+        <variables name="element" documentation="The semantic currently edited element."/>
+        <variables name="container" documentation="The semantic element corresponding to the view container."/>
+        <firstModelOperation xsi:type="tool_1:CreateInstance" typeName="PNPL::PresenceCondition" referenceName="presencecondition">
+          <subModelOperations xsi:type="tool_1:SetValue" featureName="id" valueExpression="aql:'PC ' + container.presencecondition->filter(PNPL::PresenceCondition)->size()"/>
+          <subModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::Feature" referenceName="expression"/>
+        </firstModelOperation>
+      </ownedCreateLine>
       <ownedColumnMappings name="Expression" headerLabelExpression="Expression" featureName="expression"/>
     </ownedRepresentations>
     <ownedJavaExtensions qualifiedClassName="pnpl.design.Services"/>
