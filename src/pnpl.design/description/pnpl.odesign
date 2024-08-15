@@ -4,12 +4,6 @@
     <ownedRepresentations xsi:type="description_1:DiagramDescription" name="Feature Model" initialisation="true" domainClass="PNPL::FeatureModel" enablePopupBars="true">
       <metamodel href="http://www.petrinets.org/#/"/>
       <defaultLayer name="Components">
-        <nodeMappings name="Legend" domainClass="PNPL::FeatureModel">
-          <style xsi:type="style:WorkspaceImageDescription" showIcon="false" labelExpression="Legend" iconPath="/pnpl.design/icons/Legend-FeatureModel.png" hideLabelByDefault="true" sizeComputationExpression="10" resizeKind="NSEW" workspacePath="/pnpl.design/icons/Legend-FeatureModel.png">
-            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-          </style>
-        </nodeMappings>
         <nodeMappings name="OptionalNode" deletionDescription="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@toolSections.0/@ownedTools[name='Delete%20Node']" labelDirectEdit="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@toolSections.0/@ownedTools[name='editNodeName']" semanticCandidatesExpression="aql:self.nodes->select(p | p.mandatory=false)" domainClass="PNPL::Node">
           <style xsi:type="style:SquareDescription" showIcon="false" labelPosition="node" resizeKind="NSEW" width="12" height="4">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -240,7 +234,7 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:DeleteElementDescription" name="Delete Node">
+          <ownedTools xsi:type="tool:DeleteElementDescription" name="Delete Node" forceRefresh="true">
             <element name="element"/>
             <elementView name="elementView"/>
             <containerView name="containerView"/>
@@ -249,6 +243,7 @@
                 <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:self.eContainer().relations->exists(p|p.Childs->exists(myNode | myNode=element))">
                   <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.eContainer().relations->select(p|p.Childs->exists(myNode | myNode=element))">
                     <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:self.Childs->size()=1">
+                      <subModelOperations xsi:type="tool:CreateEdgeView" mapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@edgeMappings[name='OR-Relation']" sourceExpression="aql:self."/>
                       <subModelOperations xsi:type="tool_1:RemoveElement"/>
                     </subModelOperations>
                   </subModelOperations>
@@ -315,6 +310,14 @@
           </ownedTools>
         </toolSections>
       </defaultLayer>
+      <additionalLayers name="Legend" activeByDefault="true">
+        <nodeMappings name="Legend" domainClass="PNPL::FeatureModel">
+          <style xsi:type="style:WorkspaceImageDescription" showIcon="false" labelExpression="Legend" iconPath="/pnpl.design/icons/Legend-FeatureModel.png" hideLabelByDefault="true" sizeComputationExpression="10" resizeKind="NSEW" workspacePath="/pnpl.design/icons/Legend-FeatureModel.png">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          </style>
+        </nodeMappings>
+      </additionalLayers>
     </ownedRepresentations>
     <ownedRepresentations xsi:type="description_1:DiagramDescription" name="pn-150" domainClass="PNPL::PetriNet" enablePopupBars="true">
       <metamodel href="http://www.petrinets.org/#/"/>
@@ -369,7 +372,7 @@
             <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
           </style>
         </nodeMappings>
-        <edgeMappings name="ArcTP" sourceMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@containerMappings[name='PresenceConditions']/@subNodeMappings[name='TransitionPc'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@nodeMappings[name='Transition']" targetMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@containerMappings[name='PresenceConditions']/@subNodeMappings[name='PlacePc'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@nodeMappings[name='Place']" targetFinderExpression="feature:target" sourceFinderExpression="feature:source" domainClass="PNPL::ArcTP" useDomainElement="true">
+        <edgeMappings name="ArcTP" sourceMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@containerMappings[name='PresenceConditions']/@subNodeMappings[name='TransitionPc'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@nodeMappings[name='Transition']" targetMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@containerMappings[name='PresenceConditions']/@subNodeMappings[name='PlacePc'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@nodeMappings[name='Place']" targetFinderExpression="feature:target" sourceFinderExpression="feature:source" domainClass="PNPL::ArcTP" useDomainElement="true" reconnections="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Reconnect%20Arcs%20Target'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Reconnect%20Arcs%20Source']">
           <style sizeComputationExpression="2">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
             <centerLabelStyleDescription showIcon="false" labelExpression="aql:self.weight">
@@ -378,7 +381,7 @@
             </centerLabelStyleDescription>
           </style>
         </edgeMappings>
-        <edgeMappings name="ArcPT" sourceMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@containerMappings[name='PresenceConditions']/@subNodeMappings[name='PlacePc'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@nodeMappings[name='Place']" targetMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@containerMappings[name='PresenceConditions']/@subNodeMappings[name='TransitionPc'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@nodeMappings[name='Transition']" targetFinderExpression="feature:target" sourceFinderExpression="feature:source" domainClass="PNPL::ArcPT" useDomainElement="true">
+        <edgeMappings name="ArcPT" sourceMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@containerMappings[name='PresenceConditions']/@subNodeMappings[name='PlacePc'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@nodeMappings[name='Place']" targetMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@containerMappings[name='PresenceConditions']/@subNodeMappings[name='TransitionPc'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@nodeMappings[name='Transition']" targetFinderExpression="feature:target" sourceFinderExpression="feature:source" domainClass="PNPL::ArcPT" useDomainElement="true" reconnections="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Reconnect%20Arcs%20Target'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Reconnect%20Arcs%20Source']">
           <style sizeComputationExpression="2">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
             <centerLabelStyleDescription showIcon="false" labelExpression="aql:self.weight">
@@ -482,6 +485,7 @@
                   <subModelOperations xsi:type="tool_1:SetValue" featureName="source" valueExpression="var:source"/>
                   <subModelOperations xsi:type="tool_1:SetValue" featureName="target" valueExpression="var:target"/>
                   <subModelOperations xsi:type="tool_1:SetValue" featureName="weight" valueExpression="1"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:self.source.name+'-'+self.target.name"/>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>
@@ -497,9 +501,50 @@
                   <subModelOperations xsi:type="tool_1:SetValue" featureName="source" valueExpression="var:source"/>
                   <subModelOperations xsi:type="tool_1:SetValue" featureName="target" valueExpression="var:target"/>
                   <subModelOperations xsi:type="tool_1:SetValue" featureName="weight" valueExpression="1"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:self.source.name+'-'+self.target.name"/>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ReconnectEdgeDescription" name="Reconnect Arcs Target" forceRefresh="true">
+            <source name="source"/>
+            <target name="target"/>
+            <sourceView name="sourceView"/>
+            <targetView name="targetView"/>
+            <element name="element"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:element">
+                <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:element.source.oclIsTypeOf(PNPL::Place) and element.target.oclIsTypeOf(PNPL::Transition)">
+                  <subModelOperations xsi:type="tool_1:Unset" featureName="target"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="target" valueExpression="var:target"/>
+                </subModelOperations>
+                <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:element.source.oclIsTypeOf(PNPL::Transition) and element.target.oclIsTypeOf(PNPL::Place)">
+                  <subModelOperations xsi:type="tool_1:Unset" featureName="target"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="target" valueExpression="var:target"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+            <edgeView name="edgeView"/>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ReconnectEdgeDescription" name="Reconnect Arcs Source" forceRefresh="true" reconnectionKind="RECONNECT_SOURCE">
+            <source name="source"/>
+            <target name="target"/>
+            <sourceView name="sourceView"/>
+            <targetView name="targetView"/>
+            <element name="element"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:element">
+                <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:element.source.oclIsTypeOf(PNPL::Place) and element.target.oclIsTypeOf(PNPL::Transition)">
+                  <subModelOperations xsi:type="tool_1:Unset" featureName="source"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="source" valueExpression="var:target"/>
+                </subModelOperations>
+                <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:element.source.oclIsTypeOf(PNPL::Transition) and element.target.oclIsTypeOf(PNPL::Place)">
+                  <subModelOperations xsi:type="tool_1:Unset" featureName="source"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="source" valueExpression="var:target"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+            <edgeView name="edgeView"/>
           </ownedTools>
         </toolSections>
         <customization>
@@ -510,7 +555,7 @@
       </defaultLayer>
     </ownedRepresentations>
     <ownedRepresentations xsi:type="description_2:EditionTableDescription" name="Presence Conditions" initialisation="true" showOnStartup="true" domainClass="PNPL::pnpl">
-      <metamodel href="file:/C:/Users/fmart/Desktop/UNI/6º/TFG/GUI/gui/src/pnpl/model/pnpl.ecore#/"/>
+      <metamodel href="http://www.petrinets.org/#/"/>
       <ownedLineMappings name="Lines" domainClass="PNPL::PresenceCondition"/>
       <ownedCreateLine name="createPC" label="New Presence Condition" forceRefresh="true" mapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Presence%20Conditions']/@ownedLineMappings[name='Lines']">
         <variables name="root" documentation="The semantic root element of the table."/>
