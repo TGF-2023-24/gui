@@ -344,6 +344,23 @@
     </ownedRepresentations>
     <ownedRepresentations xsi:type="description_1:DiagramDescription" dropDescriptions="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.6 //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.8" name="pn-150" domainClass="PNPL::PetriNet" enablePopupBars="true">
       <metamodel href="http://www.petrinets.org/#/"/>
+      <validationSet>
+        <ownedRules xsi:type="validation:SemanticValidationRule" name="Same Name" level="ERROR" message="Name must be unique." targetClass="PNPL::Element">
+          <audits auditExpression="aql:self.eContainer().elements->select(n | n.name = self.name)->size() = 1"/>
+        </ownedRules>
+        <ownedRules xsi:type="validation:SemanticValidationRule" name="Unconnected Element" level="ERROR" message="Unconnected element." targetClass="PNPL::Element">
+          <audits auditExpression="aql:(self.oclIsTypeOf(PNPL::Place) or self.oclIsTypeOf(PNPL::Transition))&#xD;implies (self.eContainer().elements->select(e | e.oclIsTypeOf(PNPL::ArcPT) or e.oclIsTypeOf(PNPL::ArcTP))->exists(a | a.source = self or a.target = self))&#xD;"/>
+        </ownedRules>
+        <ownedRules xsi:type="validation:SemanticValidationRule" name="Positive Tokens" level="ERROR" message="The Tokens cannot be less than 0." targetClass="PNPL::Place">
+          <audits auditExpression="aql:self.oclIsTypeOf(PNPL::Place) implies self.tokens >= 0"/>
+        </ownedRules>
+        <ownedRules xsi:type="validation:SemanticValidationRule" name="Positive Weight" level="ERROR" message="The value must be 1 or greater." targetClass="PNPL::Arc">
+          <audits auditExpression="aql:self.oclIsTypeOf(PNPL::Arc) implies self.weight > 0"/>
+        </ownedRules>
+        <ownedRules xsi:type="validation:SemanticValidationRule" name="Not empty" level="ERROR" message="Must have at least one associated element." targetClass="PNPL::PresenceCondition">
+          <audits auditExpression="aql:self.eContainer().pn_150.elements->exists(e | e.presenceCondition = self)"/>
+        </ownedRules>
+      </validationSet>
       <defaultLayer name="Components" label="Components">
         <nodeMappings name="Place" deletionDescription="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.3" labelDirectEdit="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.0" semanticCandidatesExpression="aql:self.eContainer().pn_150.elements->select(e | e.presenceCondition = null)" domainClass="PNPL::Place">
           <style xsi:type="style:DotDescription" borderSizeComputationExpression="2" showIcon="false" labelAlignment="RIGHT" resizeKind="NSEW">
