@@ -342,7 +342,7 @@
         </nodeMappings>
       </additionalLayers>
     </ownedRepresentations>
-    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="pn-150" domainClass="PNPL::PetriNet" enablePopupBars="true">
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" dropDescriptions="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.6 //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.8" name="pn-150" domainClass="PNPL::PetriNet" enablePopupBars="true">
       <metamodel href="http://www.petrinets.org/#/"/>
       <defaultLayer name="Components" label="Components">
         <nodeMappings name="Place" deletionDescription="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.3" labelDirectEdit="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.0" semanticCandidatesExpression="aql:self.eContainer().pn_150.elements->select(e | e.presenceCondition = null)" domainClass="PNPL::Place">
@@ -413,7 +413,7 @@
             </centerLabelStyleDescription>
           </style>
         </edgeMappings>
-        <containerMappings name="PresenceConditions" domainClass="PNPL::PresenceCondition">
+        <containerMappings name="PresenceConditions" synchronizationLock="true" domainClass="PNPL::PresenceCondition" dropDescriptions="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.5 //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.7">
           <subNodeMappings name="PlacePc" label="PlacePc" labelDirectEdit="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.0" semanticCandidatesExpression="aql:self.eContainer().pn_150.elements->select(e | e.presenceCondition = self)" domainClass="PNPL::Place">
             <style xsi:type="style:DotDescription" borderSizeComputationExpression="2" showIcon="false" resizeKind="NSEW">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -464,7 +464,7 @@
               <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             </style>
           </subNodeMappings>
-          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="3" borderLineStyle="dot" showIcon="false" labelExpression="feature:id">
+          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="3" borderLineStyle="dot" showIcon="false" labelExpression="feature:id" widthComputationExpression="aql:self.children->collect(e | e.height).sum() + 10" heightComputationExpression="aql:self.children->collect(e | e.width).max() + 10">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_red']"/>
             <labelFormat>italic</labelFormat>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -607,6 +607,81 @@
                     </subModelOperations>
                   </subModelOperations>
                   <subModelOperations xsi:type="tool_1:RemoveElement"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:ContainerDropDescription" name="Place PC in" forceRefresh="true" mappings="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@nodeMappings[name='Place'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@containerMappings[name='PresenceConditions']/@subNodeMappings[name='PlacePc']" moveEdges="true">
+              <oldContainer name="oldSemanticContainer"/>
+              <newContainer name="newSemanticContainer"/>
+              <element name="element"/>
+              <newViewContainer name="newContainerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:element">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="presenceCondition" valueExpression="aql:newSemanticContainer.oclAsType(PNPL::PresenceCondition)"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:ContainerDropDescription" name="Place PC out" forceRefresh="true" mappings="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@nodeMappings[name='Place'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@containerMappings[name='PresenceConditions']/@subNodeMappings[name='PlacePc']">
+              <oldContainer name="oldSemanticContainer"/>
+              <newContainer name="newSemanticContainer"/>
+              <element name="element"/>
+              <newViewContainer name="newContainerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:element.oclAsType(PNPL::Place)">
+                  <subModelOperations xsi:type="tool_1:Unset" featureName="presenceCondition"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:ContainerDropDescription" name="Transition PC in" forceRefresh="true" mappings="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@containerMappings[name='PresenceConditions']/@subNodeMappings[name='TransitionPc'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@nodeMappings[name='Transition']" moveEdges="true">
+              <oldContainer name="oldSemanticContainer"/>
+              <newContainer name="newSemanticContainer"/>
+              <element name="element"/>
+              <newViewContainer name="newContainerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:element">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="presenceCondition" valueExpression="aql:newSemanticContainer.oclAsType(PNPL::PresenceCondition)"/>
+                  <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:self.eContainer().elements->filter(PNPL::ArcTP)->exists(p | p.source = self)">
+                    <subModelOperations xsi:type="tool_1:For" expression="aql:self.eContainer().elements->filter(PNPL::ArcTP)->select(p | p.source = self)" iteratorName="arcs">
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="presenceCondition" valueExpression="aql:newSemanticContainer.oclAsType(PNPL::PresenceCondition)"/>
+                    </subModelOperations>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:self.eContainer().elements->filter(PNPL::ArcPT)->exists(p | p.target = self)">
+                    <subModelOperations xsi:type="tool_1:For" expression="aql:self.eContainer().elements->filter(PNPL::ArcPT)->select(p | p.target = self)" iteratorName="arcs">
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="presenceCondition" valueExpression="aql:newSemanticContainer.oclAsType(PNPL::PresenceCondition)"/>
+                    </subModelOperations>
+                  </subModelOperations>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:ContainerDropDescription" name="Transition PC out" forceRefresh="true" mappings="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@nodeMappings[name='Transition'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@containerMappings[name='PresenceConditions']/@subNodeMappings[name='TransitionPc']">
+              <oldContainer name="oldSemanticContainer"/>
+              <newContainer name="newSemanticContainer"/>
+              <element name="element"/>
+              <newViewContainer name="newContainerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:element.oclAsType(PNPL::Transition)">
+                  <subModelOperations xsi:type="tool_1:Unset" featureName="presenceCondition"/>
+                  <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:self.eContainer().elements->filter(PNPL::ArcTP)->exists(p | p.source = self)">
+                    <subModelOperations xsi:type="tool_1:For" expression="aql:self.eContainer().elements->filter(PNPL::ArcTP)->select(p | p.source = self)" iteratorName="arcs">
+                      <subModelOperations xsi:type="tool_1:Unset" featureName="presenceCondition"/>
+                    </subModelOperations>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:self.eContainer().elements->filter(PNPL::ArcPT)->exists(p | p.target = self)">
+                    <subModelOperations xsi:type="tool_1:For" expression="aql:self.eContainer().elements->filter(PNPL::ArcPT)->select(p | p.target = self)" iteratorName="arcs">
+                      <subModelOperations xsi:type="tool_1:Unset" featureName="presenceCondition"/>
+                    </subModelOperations>
+                  </subModelOperations>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:ContainerCreationDescription" name="Presence Conditions" forceRefresh="true" containerMappings="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@containerMappings[name='PresenceConditions']">
+              <variable name="container"/>
+              <viewVariable name="containerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:container.eContainer().oclAsType(PNPL::pnpl)">
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::PresenceCondition" referenceName="presencecondition">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="id" valueExpression="aql:'PC ' + container.eContainer().oclAsType(PNPL::pnpl).presencecondition->filter(PNPL::PresenceCondition)->size()"/>
+                  </subModelOperations>
                 </firstModelOperations>
               </initialOperation>
             </tools>
