@@ -520,6 +520,7 @@
                   <subModelOperations xsi:type="tool_1:SetValue" featureName="target" valueExpression="var:target"/>
                   <subModelOperations xsi:type="tool_1:SetValue" featureName="weight" valueExpression="1"/>
                   <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:self.source.name+'-'+self.target.name"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="presenceCondition" valueExpression="aql:self.source.presenceCondition"/>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>
@@ -536,6 +537,7 @@
                   <subModelOperations xsi:type="tool_1:SetValue" featureName="target" valueExpression="var:target"/>
                   <subModelOperations xsi:type="tool_1:SetValue" featureName="weight" valueExpression="1"/>
                   <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:self.source.name+'-'+self.target.name"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="presenceCondition" valueExpression="aql:self.target.presenceCondition"/>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>
