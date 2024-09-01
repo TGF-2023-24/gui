@@ -1,7 +1,7 @@
 package pnpl.design;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import java.util.List;
 /**
  * The services class used by VSM.
@@ -17,25 +17,26 @@ public class Services {
 	      return self;
 	    }
 	 
-	 public void clearRequires(EObject element) {
-	        if (element != null) {
-	            EStructuralFeature childsFeature = element.eClass().getEStructuralFeature("childs");
-	            if (childsFeature != null) {
-	                Object childsValue = element.eGet(childsFeature);
-	                if (childsValue instanceof List<?>) {
-	                    List<?> childsList = (List<?>) childsValue;
-	                    for (Object child : childsList) {
-	                        if (child instanceof EObject) {
-	                            EObject childEObject = (EObject) child;
-	                            EStructuralFeature requiresFeature = childEObject.eClass().getEStructuralFeature("requires");
-	                            if (requiresFeature != null) {
-	                                childEObject.eSet(requiresFeature, null);
-	                            }
-	                        }
-	                    }
-	                }
+	 public void deleteRelationIfOnlyChild(EObject element) {
+	        // Obtén el contenedor del nodo, asumiendo que es una relación o que contiene relaciones
+	        EObject container = element.eContainer();
+
+	        if (container == null) {
+	            return; // Si el contenedor es nulo, no se puede proceder
+	        }
+
+	        // Obtén las relaciones desde el contenedor (modifica 'getRelations' y 'getChilds' según tu metamodelo)
+	        List<EObject> relations = (List<EObject>) container.eGet(container.eClass().getEStructuralFeature("relations"));
+
+	        for (EObject relation : relations) {
+	            List<EObject> children = (List<EObject>) relation.eGet(relation.eClass().getEStructuralFeature("Childs"));
+
+	            // Verifica si la relación tiene al nodo como único hijo
+	            if (children.contains(element) && children.size() == 1) {
+	                // Elimina la relación
+	                EcoreUtil.delete(relation);
+	                break; // Sale del bucle después de eliminar la relación
 	            }
 	        }
-	    }
-   
+	 }
 }
