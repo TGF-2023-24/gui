@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:description_2="http://www.eclipse.org/sirius/table/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" name="pnpl" version="12.0.0.2017041100">
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:description_2="http://www.eclipse.org/sirius/table/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" xmlns:validation="http://www.eclipse.org/sirius/description/validation/1.1.0" name="pnpl" version="12.0.0.2017041100">
   <ownedViewpoints name="pnpl-1" modelFileExtension="xmi">
     <ownedRepresentations xsi:type="description_1:DiagramDescription" name="Feature Model" initialisation="true" domainClass="PNPL::FeatureModel" enablePopupBars="true">
       <metamodel href="http://www.petrinets.org/#/"/>
+      <validationSet name="Feature Model">
+        <ownedRules xsi:type="validation:SemanticValidationRule" name="Same Name" level="ERROR" message="Name must be unique" targetClass="PNPL::Node">
+          <audits auditExpression="aql:self.eContainer().nodes->select(n | n.name = self.name)->size() = 1"/>
+        </ownedRules>
+        <ownedRules xsi:type="validation:SemanticValidationRule" name="Loop Relation" level="ERROR" message="A parent node cannot be its own child." targetClass="PNPL::Relation">
+          <audits auditExpression="aql:not self.Childs->includes(self.Parent)"/>
+        </ownedRules>
+        <ownedRules xsi:type="validation:SemanticValidationRule" name="Unconnected Node" level="ERROR" message="Unconnected node." targetClass="PNPL::Node">
+          <audits auditExpression="aql:self.eContainer().relations->exists(r | r.Childs->includes(self) or r.Parent = self)"/>
+        </ownedRules>
+        <ownedRules xsi:type="validation:SemanticValidationRule" name="Parent of Multiple Relations" level="ERROR" message="Can only be parent of one relation, not multiple." targetClass="PNPL::Node">
+          <audits auditExpression="aql:self.eContainer().relations->select(r | r.Parent = self)->size() &lt;= 1"/>
+        </ownedRules>
+        <ownedRules xsi:type="validation:SemanticValidationRule" name="Child of Multiple Relations" level="ERROR" message="Can only be child of one relation, not multiple." targetClass="PNPL::Node">
+          <audits auditExpression="aql:self.eContainer().relations->select(r | r.Childs->includes(self))->size() &lt;= 1 "/>
+        </ownedRules>
+      </validationSet>
       <defaultLayer name="Components">
         <nodeMappings name="OptionalNode" deletionDescription="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.2" labelDirectEdit="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.0" semanticCandidatesExpression="aql:self.nodes->select(p | p.mandatory=false)" domainClass="PNPL::Node">
           <style xsi:type="style:SquareDescription" showIcon="false" labelPosition="node" resizeKind="NSEW" width="12" height="4">
@@ -328,7 +345,7 @@
     <ownedRepresentations xsi:type="description_1:DiagramDescription" name="pn-150" domainClass="PNPL::PetriNet" enablePopupBars="true">
       <metamodel href="http://www.petrinets.org/#/"/>
       <defaultLayer name="Components" label="Components">
-        <nodeMappings name="Place" deletionDescription="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Delete%20Place']" labelDirectEdit="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='editName']" semanticCandidatesExpression="aql:self.eContainer().pn_150.elements->select(e | e.presenceCondition = null)" domainClass="PNPL::Place">
+        <nodeMappings name="Place" deletionDescription="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.3" labelDirectEdit="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.0" semanticCandidatesExpression="aql:self.eContainer().pn_150.elements->select(e | e.presenceCondition = null)" domainClass="PNPL::Place">
           <style xsi:type="style:DotDescription" borderSizeComputationExpression="2" showIcon="false" labelAlignment="RIGHT" resizeKind="NSEW">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -371,14 +388,14 @@
             </style>
           </conditionnalStyles>
         </nodeMappings>
-        <nodeMappings name="Transition" deletionDescription="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Delete%20Transition']" labelDirectEdit="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='editName']" semanticCandidatesExpression="aql:self.eContainer().pn_150.elements->select(e | e.presenceCondition = null)" domainClass="PNPL::Transition">
+        <nodeMappings name="Transition" deletionDescription="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.4" labelDirectEdit="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.0" semanticCandidatesExpression="aql:self.eContainer().pn_150.elements->select(e | e.presenceCondition = null)" domainClass="PNPL::Transition">
           <style xsi:type="style:SquareDescription" showIcon="false" resizeKind="NSEW" width="3" height="7">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
           </style>
         </nodeMappings>
-        <edgeMappings name="ArcTP" sourceMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@containerMappings[name='PresenceConditions']/@subNodeMappings[name='TransitionPc'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@nodeMappings[name='Transition']" targetMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@containerMappings[name='PresenceConditions']/@subNodeMappings[name='PlacePc'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@nodeMappings[name='Place']" targetFinderExpression="feature:target" sourceFinderExpression="feature:source" domainClass="PNPL::ArcTP" useDomainElement="true" reconnections="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Reconnect%20Arcs%20Target'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Reconnect%20Arcs%20Source']">
+        <edgeMappings name="ArcTP" sourceMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@containerMappings[name='PresenceConditions']/@subNodeMappings[name='TransitionPc'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@nodeMappings[name='Transition']" targetMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@containerMappings[name='PresenceConditions']/@subNodeMappings[name='PlacePc'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@nodeMappings[name='Place']" targetFinderExpression="feature:target" sourceFinderExpression="feature:source" domainClass="PNPL::ArcTP" useDomainElement="true" reconnections="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.1 //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.2">
           <style sizeComputationExpression="2">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
             <centerLabelStyleDescription showIcon="false" labelExpression="aql:self.weight">
@@ -387,7 +404,7 @@
             </centerLabelStyleDescription>
           </style>
         </edgeMappings>
-        <edgeMappings name="ArcPT" sourceMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@containerMappings[name='PresenceConditions']/@subNodeMappings[name='PlacePc'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@nodeMappings[name='Place']" targetMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@containerMappings[name='PresenceConditions']/@subNodeMappings[name='TransitionPc'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@nodeMappings[name='Transition']" targetFinderExpression="feature:target" sourceFinderExpression="feature:source" domainClass="PNPL::ArcPT" useDomainElement="true" reconnections="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Reconnect%20Arcs%20Target'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Reconnect%20Arcs%20Source']">
+        <edgeMappings name="ArcPT" sourceMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@containerMappings[name='PresenceConditions']/@subNodeMappings[name='PlacePc'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@nodeMappings[name='Place']" targetMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@containerMappings[name='PresenceConditions']/@subNodeMappings[name='TransitionPc'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@nodeMappings[name='Transition']" targetFinderExpression="feature:target" sourceFinderExpression="feature:source" domainClass="PNPL::ArcPT" useDomainElement="true" reconnections="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.1 //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.2">
           <style sizeComputationExpression="2">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
             <centerLabelStyleDescription showIcon="false" labelExpression="aql:self.weight">
@@ -397,7 +414,7 @@
           </style>
         </edgeMappings>
         <containerMappings name="PresenceConditions" domainClass="PNPL::PresenceCondition">
-          <subNodeMappings name="PlacePc" label="PlacePc" labelDirectEdit="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='editName']" semanticCandidatesExpression="aql:self.eContainer().pn_150.elements->select(e | e.presenceCondition = self)" domainClass="PNPL::Place">
+          <subNodeMappings name="PlacePc" label="PlacePc" labelDirectEdit="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.0" semanticCandidatesExpression="aql:self.eContainer().pn_150.elements->select(e | e.presenceCondition = self)" domainClass="PNPL::Place">
             <style xsi:type="style:DotDescription" borderSizeComputationExpression="2" showIcon="false" resizeKind="NSEW">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -440,7 +457,7 @@
               </style>
             </conditionnalStyles>
           </subNodeMappings>
-          <subNodeMappings name="TransitionPc" labelDirectEdit="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='editName']" semanticCandidatesExpression="aql:self.eContainer().pn_150.elements->select(e | e.presenceCondition = self)" domainClass="PNPL::Transition">
+          <subNodeMappings name="TransitionPc" labelDirectEdit="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.0" semanticCandidatesExpression="aql:self.eContainer().pn_150.elements->select(e | e.presenceCondition = self)" domainClass="PNPL::Transition">
             <style xsi:type="style:SquareDescription" showIcon="false" resizeKind="NSEW" width="3" height="7">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -472,12 +489,6 @@
               <firstModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::Transition" referenceName="elements">
                 <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'t_'+container.elements->filter(PNPL::Place)->size()"/>
               </firstModelOperations>
-            </initialOperation>
-          </ownedTools>
-          <ownedTools xsi:type="tool:DirectEditLabel" name="editName" forceRefresh="true">
-            <mask mask="{0}"/>
-            <initialOperation>
-              <firstModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="var:0"/>
             </initialOperation>
           </ownedTools>
           <ownedTools xsi:type="tool:EdgeCreationDescription" name="ArcTP" precondition="aql:preTarget.differs(preSource)" forceRefresh="true" edgeMappings="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@edgeMappings[name='ArcTP']">
@@ -512,85 +523,93 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:ReconnectEdgeDescription" name="Reconnect Arcs Target" forceRefresh="true">
-            <source name="source"/>
-            <target name="target"/>
-            <sourceView name="sourceView"/>
-            <targetView name="targetView"/>
-            <element name="element"/>
-            <initialOperation>
-              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:element">
-                <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:element.source.oclIsTypeOf(PNPL::Place) and element.target.oclIsTypeOf(PNPL::Transition)">
-                  <subModelOperations xsi:type="tool_1:Unset" featureName="target"/>
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="target" valueExpression="var:target"/>
-                </subModelOperations>
-                <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:element.source.oclIsTypeOf(PNPL::Transition) and element.target.oclIsTypeOf(PNPL::Place)">
-                  <subModelOperations xsi:type="tool_1:Unset" featureName="target"/>
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="target" valueExpression="var:target"/>
-                </subModelOperations>
-              </firstModelOperations>
-            </initialOperation>
-            <edgeView name="edgeView"/>
-          </ownedTools>
-          <ownedTools xsi:type="tool:ReconnectEdgeDescription" name="Reconnect Arcs Source" forceRefresh="true" reconnectionKind="RECONNECT_SOURCE">
-            <source name="source"/>
-            <target name="target"/>
-            <sourceView name="sourceView"/>
-            <targetView name="targetView"/>
-            <element name="element"/>
-            <initialOperation>
-              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:element">
-                <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:element.source.oclIsTypeOf(PNPL::Place) and element.target.oclIsTypeOf(PNPL::Transition)">
-                  <subModelOperations xsi:type="tool_1:Unset" featureName="source"/>
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="source" valueExpression="var:target"/>
-                </subModelOperations>
-                <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:element.source.oclIsTypeOf(PNPL::Transition) and element.target.oclIsTypeOf(PNPL::Place)">
-                  <subModelOperations xsi:type="tool_1:Unset" featureName="source"/>
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="source" valueExpression="var:target"/>
-                </subModelOperations>
-              </firstModelOperations>
-            </initialOperation>
-            <edgeView name="edgeView"/>
-          </ownedTools>
-          <ownedTools xsi:type="tool:DeleteElementDescription" name="Delete Place" forceRefresh="true">
-            <element name="element"/>
-            <elementView name="elementView"/>
-            <containerView name="containerView"/>
-            <initialOperation>
-              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:element">
-                <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:self.eContainer().elements->filter(PNPL::ArcPT)->exists(p | p.source = self)">
-                  <subModelOperations xsi:type="tool_1:For" expression="aql:self.eContainer().elements->filter(PNPL::ArcPT)->select(p | p.source = self)" iteratorName="arcs">
-                    <subModelOperations xsi:type="tool_1:RemoveElement"/>
+          <ownedTools xsi:type="tool:ToolGroup" name="Edit">
+            <tools xsi:type="tool:DirectEditLabel" name="editName" forceRefresh="true">
+              <mask mask="{0}"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="var:0"/>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:ReconnectEdgeDescription" name="Reconnect Arcs Target" forceRefresh="true">
+              <source name="source"/>
+              <target name="target"/>
+              <sourceView name="sourceView"/>
+              <targetView name="targetView"/>
+              <element name="element"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:element">
+                  <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:element.source.oclIsTypeOf(PNPL::Place) and element.target.oclIsTypeOf(PNPL::Transition)">
+                    <subModelOperations xsi:type="tool_1:Unset" featureName="target"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="target" valueExpression="var:target"/>
                   </subModelOperations>
-                </subModelOperations>
-                <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:self.eContainer().elements->filter(PNPL::ArcTP)->exists(p | p.target = self)">
-                  <subModelOperations xsi:type="tool_1:For" expression="aql:self.eContainer().elements->filter(PNPL::ArcTP)->select(p | p.target = self)" iteratorName="arcs">
-                    <subModelOperations xsi:type="tool_1:RemoveElement"/>
+                  <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:element.source.oclIsTypeOf(PNPL::Transition) and element.target.oclIsTypeOf(PNPL::Place)">
+                    <subModelOperations xsi:type="tool_1:Unset" featureName="target"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="target" valueExpression="var:target"/>
                   </subModelOperations>
-                </subModelOperations>
-                <subModelOperations xsi:type="tool_1:RemoveElement"/>
-              </firstModelOperations>
-            </initialOperation>
-          </ownedTools>
-          <ownedTools xsi:type="tool:DeleteElementDescription" name="Delete Transition" forceRefresh="true">
-            <element name="element"/>
-            <elementView name="elementView"/>
-            <containerView name="containerView"/>
-            <initialOperation>
-              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:element">
-                <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:self.eContainer().elements->filter(PNPL::ArcPT)->exists(p|p.target->includes(self))">
-                  <subModelOperations xsi:type="tool_1:For" expression="aql:self.eContainer().elements->filter(PNPL::ArcPT)->select(p|p.target->includes(self))" iteratorName="arcs">
-                    <subModelOperations xsi:type="tool_1:RemoveElement"/>
+                </firstModelOperations>
+              </initialOperation>
+              <edgeView name="edgeView"/>
+            </tools>
+            <tools xsi:type="tool:ReconnectEdgeDescription" name="Reconnect Arcs Source" forceRefresh="true" reconnectionKind="RECONNECT_SOURCE">
+              <source name="source"/>
+              <target name="target"/>
+              <sourceView name="sourceView"/>
+              <targetView name="targetView"/>
+              <element name="element"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:element">
+                  <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:element.source.oclIsTypeOf(PNPL::Place) and element.target.oclIsTypeOf(PNPL::Transition)">
+                    <subModelOperations xsi:type="tool_1:Unset" featureName="source"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="source" valueExpression="var:target"/>
                   </subModelOperations>
-                </subModelOperations>
-                <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:self.eContainer().elements->filter(PNPL::ArcTP)->exists(p|p.source->includes(self))">
-                  <subModelOperations xsi:type="tool_1:For" expression="aql:self.eContainer().elements->filter(PNPL::ArcTP)->select(p|p.source->includes(self))" iteratorName="arcs">
-                    <subModelOperations xsi:type="tool_1:RemoveElement"/>
+                  <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:element.source.oclIsTypeOf(PNPL::Transition) and element.target.oclIsTypeOf(PNPL::Place)">
+                    <subModelOperations xsi:type="tool_1:Unset" featureName="source"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="source" valueExpression="var:target"/>
                   </subModelOperations>
-                </subModelOperations>
-                <subModelOperations xsi:type="tool_1:RemoveElement"/>
-              </firstModelOperations>
-            </initialOperation>
+                </firstModelOperations>
+              </initialOperation>
+              <edgeView name="edgeView"/>
+            </tools>
+            <tools xsi:type="tool:DeleteElementDescription" name="Delete Place" forceRefresh="true">
+              <element name="element"/>
+              <elementView name="elementView"/>
+              <containerView name="containerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:element">
+                  <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:self.eContainer().elements->filter(PNPL::ArcPT)->exists(p | p.source = self)">
+                    <subModelOperations xsi:type="tool_1:For" expression="aql:self.eContainer().elements->filter(PNPL::ArcPT)->select(p | p.source = self)" iteratorName="arcs">
+                      <subModelOperations xsi:type="tool_1:RemoveElement"/>
+                    </subModelOperations>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:self.eContainer().elements->filter(PNPL::ArcTP)->exists(p | p.target = self)">
+                    <subModelOperations xsi:type="tool_1:For" expression="aql:self.eContainer().elements->filter(PNPL::ArcTP)->select(p | p.target = self)" iteratorName="arcs">
+                      <subModelOperations xsi:type="tool_1:RemoveElement"/>
+                    </subModelOperations>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool_1:RemoveElement"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:DeleteElementDescription" name="Delete Transition" forceRefresh="true">
+              <element name="element"/>
+              <elementView name="elementView"/>
+              <containerView name="containerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:element">
+                  <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:self.eContainer().elements->filter(PNPL::ArcPT)->exists(p|p.target->includes(self))">
+                    <subModelOperations xsi:type="tool_1:For" expression="aql:self.eContainer().elements->filter(PNPL::ArcPT)->select(p|p.target->includes(self))" iteratorName="arcs">
+                      <subModelOperations xsi:type="tool_1:RemoveElement"/>
+                    </subModelOperations>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:self.eContainer().elements->filter(PNPL::ArcTP)->exists(p|p.source->includes(self))">
+                    <subModelOperations xsi:type="tool_1:For" expression="aql:self.eContainer().elements->filter(PNPL::ArcTP)->select(p|p.source->includes(self))" iteratorName="arcs">
+                      <subModelOperations xsi:type="tool_1:RemoveElement"/>
+                    </subModelOperations>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool_1:RemoveElement"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
           </ownedTools>
         </toolSections>
         <customization>
