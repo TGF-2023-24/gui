@@ -88,7 +88,7 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:EdgeCreationDescription" name="OR-Relation" precondition="aql:preTarget.differs(preSource)" forceRefresh="true" edgeMappings="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@edgeMappings[name='OR-Relation']">
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="OR Relation" precondition="aql:preTarget.differs(preSource)" forceRefresh="true" edgeMappings="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@edgeMappings[name='OR-Relation']">
             <sourceVariable name="source"/>
             <targetVariable name="target"/>
             <sourceViewVariable name="sourceView"/>
