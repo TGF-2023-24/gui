@@ -351,11 +351,11 @@
         <ownedRules xsi:type="validation:SemanticValidationRule" name="Unconnected Element" level="ERROR" message="Unconnected element." targetClass="PNPL::Element">
           <audits auditExpression="aql:(self.oclIsTypeOf(PNPL::Place) or self.oclIsTypeOf(PNPL::Transition))&#xD;implies (self.eContainer().elements->select(e | e.oclIsTypeOf(PNPL::ArcPT) or e.oclIsTypeOf(PNPL::ArcTP))->exists(a | a.source = self or a.target = self))&#xD;"/>
         </ownedRules>
-        <ownedRules xsi:type="validation:SemanticValidationRule" name="Positive Tokens" level="ERROR" message="The Tokens cannot be less than 0." targetClass="PNPL::Place">
-          <audits auditExpression="aql:self.oclIsTypeOf(PNPL::Place) implies self.tokens >= 0"/>
+        <ownedRules xsi:type="validation:SemanticValidationRule" name="Positive Tokens" level="ERROR" message="Number of tokens cannot be less than 0." targetClass="PNPL::Place">
+          <audits auditExpression="aql:self.tokens >= 0"/>
         </ownedRules>
         <ownedRules xsi:type="validation:SemanticValidationRule" name="Positive Weight" level="ERROR" message="The value must be 1 or greater." targetClass="PNPL::Arc">
-          <audits auditExpression="aql:self.oclIsTypeOf(PNPL::Arc) implies self.weight > 0"/>
+          <audits auditExpression="aql:self.weight >0"/>
         </ownedRules>
         <ownedRules xsi:type="validation:SemanticValidationRule" name="Not empty" level="ERROR" message="Must have at least one associated element." targetClass="PNPL::PresenceCondition">
           <audits auditExpression="aql:self.eContainer().pn_150.elements->exists(e | e.presenceCondition = self)"/>
