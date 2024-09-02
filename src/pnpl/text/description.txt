@@ -16,7 +16,7 @@ Package PNPL <http://www.petrinets.org/>
     Reference elements : Element<<1..*>>
 
   Class Element
-    Reference presenceCondition : PresenceCondition<<1..1>>
+    Reference presenceCondition : PresenceCondition
     Attribute name : EString<<1..1>>
 
   Class Place -> Element

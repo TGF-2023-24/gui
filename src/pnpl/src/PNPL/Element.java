@@ -29,7 +29,7 @@ public interface Element extends EObject {
 	 * @return the value of the '<em>Presence Condition</em>' reference.
 	 * @see #setPresenceCondition(PresenceCondition)
 	 * @see PNPL.PNPLPackage#getElement_PresenceCondition()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	PresenceCondition getPresenceCondition();

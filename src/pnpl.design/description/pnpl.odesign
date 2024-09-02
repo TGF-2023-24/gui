@@ -481,7 +481,7 @@
               <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             </style>
           </subNodeMappings>
-          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="3" borderLineStyle="dot" showIcon="false" labelExpression="feature:id" widthComputationExpression="aql:self.children->collect(e | e.height).sum() + 10" heightComputationExpression="aql:self.children->collect(e | e.width).max() + 10">
+          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="3" borderLineStyle="dot" showIcon="false" labelExpression="feature:id" widthComputationExpression="" heightComputationExpression="">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_red']"/>
             <labelFormat>italic</labelFormat>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -657,7 +657,7 @@
               <element name="element"/>
               <newViewContainer name="newContainerView"/>
               <initialOperation>
-                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:element">
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:element.oclAsType(PNPL::Transition)">
                   <subModelOperations xsi:type="tool_1:SetValue" featureName="presenceCondition" valueExpression="aql:newSemanticContainer.oclAsType(PNPL::PresenceCondition)"/>
                   <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:self.eContainer().elements->filter(PNPL::ArcTP)->exists(p | p.source = self)">
                     <subModelOperations xsi:type="tool_1:For" expression="aql:self.eContainer().elements->filter(PNPL::ArcTP)->select(p | p.source = self)" iteratorName="arcs">
@@ -722,10 +722,9 @@
         <variables name="container" documentation="The semantic element corresponding to the view container."/>
         <firstModelOperation xsi:type="tool_1:CreateInstance" typeName="PNPL::PresenceCondition" referenceName="presencecondition">
           <subModelOperations xsi:type="tool_1:SetValue" featureName="id" valueExpression="aql:'PC ' + container.presencecondition->filter(PNPL::PresenceCondition)->size()"/>
-          <subModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::Feature" referenceName="expression"/>
         </firstModelOperation>
       </ownedCreateLine>
-      <ownedColumnMappings name="Expression" headerLabelExpression="Expression" featureName="expression"/>
+      <ownedColumnMappings name="Expression" headerLabelExpression="Expression" canEdit="true" featureName="expression" labelExpression="aql:self.expression.parseExpression()"/>
     </ownedRepresentations>
     <ownedJavaExtensions qualifiedClassName="pnpl.design.Services"/>
   </ownedViewpoints>
