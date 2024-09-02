@@ -508,6 +508,17 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="Presence Conditions" forceRefresh="true" containerMappings="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@containerMappings[name='PresenceConditions']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:container.eContainer().oclAsType(PNPL::pnpl)">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::PresenceCondition" referenceName="presencecondition">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="id" valueExpression="aql:'PC ' + container.eContainer().oclAsType(PNPL::pnpl).presencecondition->filter(PNPL::PresenceCondition)->size()"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
           <ownedTools xsi:type="tool:EdgeCreationDescription" name="ArcTP" precondition="aql:preTarget.differs(preSource)" forceRefresh="true" edgeMappings="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@edgeMappings[name='ArcTP']">
             <sourceVariable name="source"/>
             <targetVariable name="target"/>
@@ -689,17 +700,6 @@
                     <subModelOperations xsi:type="tool_1:For" expression="aql:self.eContainer().elements->filter(PNPL::ArcPT)->select(p | p.target = self)" iteratorName="arcs">
                       <subModelOperations xsi:type="tool_1:Unset" featureName="presenceCondition"/>
                     </subModelOperations>
-                  </subModelOperations>
-                </firstModelOperations>
-              </initialOperation>
-            </tools>
-            <tools xsi:type="tool:ContainerCreationDescription" name="Presence Conditions" forceRefresh="true" containerMappings="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@containerMappings[name='PresenceConditions']">
-              <variable name="container"/>
-              <viewVariable name="containerView"/>
-              <initialOperation>
-                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:container.eContainer().oclAsType(PNPL::pnpl)">
-                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::PresenceCondition" referenceName="presencecondition">
-                    <subModelOperations xsi:type="tool_1:SetValue" featureName="id" valueExpression="aql:'PC ' + container.eContainer().oclAsType(PNPL::pnpl).presencecondition->filter(PNPL::PresenceCondition)->size()"/>
                   </subModelOperations>
                 </firstModelOperations>
               </initialOperation>
