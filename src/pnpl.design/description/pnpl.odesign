@@ -19,6 +19,9 @@
         <ownedRules xsi:type="validation:SemanticValidationRule" name="Child of Multiple Relations" level="ERROR" message="Can only be child of one relation, not multiple." targetClass="PNPL::Node">
           <audits auditExpression="aql:self.eContainer().relations->select(r | r.Childs->includes(self))->size() &lt;= 1 "/>
         </ownedRules>
+        <ownedRules xsi:type="validation:SemanticValidationRule" name="Mutual Exclusion" level="ERROR" message="Exclusion must be mutual" targetClass="PNPL::Node">
+          <audits auditExpression="aql:not(self.exclude->exists(p | not(p.exclude->includes(self))))"/>
+        </ownedRules>
       </validationSet>
       <defaultLayer name="Components">
         <nodeMappings name="OptionalNode" deletionDescription="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.2" labelDirectEdit="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.0" semanticCandidatesExpression="aql:self.nodes->select(p | p.mandatory=false)" domainClass="PNPL::Node">
