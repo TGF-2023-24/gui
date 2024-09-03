@@ -335,11 +335,86 @@
       </defaultLayer>
       <additionalLayers name="Legend" activeByDefault="true">
         <nodeMappings name="Legend" domainClass="PNPL::FeatureModel">
-          <style xsi:type="style:WorkspaceImageDescription" showIcon="false" labelExpression="Legend" iconPath="/pnpl.design/icons/Legend-FeatureModel.png" hideLabelByDefault="true" sizeComputationExpression="10" resizeKind="NSEW" workspacePath="/pnpl.design/icons/Legend-FeatureModel.png">
+          <style xsi:type="style:WorkspaceImageDescription" labelSize="1" showIcon="false" labelExpression="Legend" iconPath="/pnpl.design/icons/Legend-FeatureModel.png" hideLabelByDefault="true" sizeComputationExpression="40" resizeKind="NSEW" workspacePath="/pnpl.design/icons/legendFM.png">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
           </style>
         </nodeMappings>
+      </additionalLayers>
+      <additionalLayers name="Requires/Excludes" activeByDefault="true">
+        <edgeMappings name="Requires" sourceMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@nodeMappings[name='MandatoryNode'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@nodeMappings[name='OptionalNode']" targetMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@nodeMappings[name='MandatoryNode'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@nodeMappings[name='OptionalNode']" targetFinderExpression="aql:self.getRequiresExcludingParents()" reconnections="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@additionalLayers[name='Requires%2FExcludes']/@toolSections.0/@ownedTools[name='Edit']/@tools.0">
+          <style lineStyle="dash" sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Excludes" sourceMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@nodeMappings[name='MandatoryNode'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@nodeMappings[name='OptionalNode']" targetMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@nodeMappings[name='OptionalNode'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@nodeMappings[name='MandatoryNode']" targetFinderExpression="aql:self.exclude->select(e | e.exclude->includes(self) and self.name &lt; e.name)" reconnections="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@additionalLayers[name='Requires%2FExcludes']/@toolSections.0/@ownedTools[name='Edit']/@tools.1">
+          <style lineStyle="dash" sourceArrow="InputArrow" sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+          </style>
+        </edgeMappings>
+        <toolSections name="Create">
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="Requires" forceRefresh="true" edgeMappings="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@additionalLayers[name='Requires%2FExcludes']/@edgeMappings[name='Requires']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:source">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="aql:target"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="Excludes" forceRefresh="true" edgeMappings="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@additionalLayers[name='Requires%2FExcludes']/@edgeMappings[name='Excludes']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:source">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="exclude" valueExpression="aql:target"/>
+                <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:target">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="exclude" valueExpression="aql:source"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ToolGroup" name="Edit">
+            <tools xsi:type="tool:ReconnectEdgeDescription" name="Requires Target" forceRefresh="true">
+              <source name="source"/>
+              <target name="target"/>
+              <sourceView name="sourceView"/>
+              <targetView name="targetView"/>
+              <element name="element"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:element">
+                  <subModelOperations xsi:type="tool_1:Unset" featureName="requires" elementExpression="aql:source"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="requires" valueExpression="aql:target"/>
+                </firstModelOperations>
+              </initialOperation>
+              <edgeView name="edgeView"/>
+            </tools>
+            <tools xsi:type="tool:ReconnectEdgeDescription" name="Excludes Target" forceRefresh="true">
+              <source name="source"/>
+              <target name="target"/>
+              <sourceView name="sourceView"/>
+              <targetView name="targetView"/>
+              <element name="element"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:element">
+                  <subModelOperations xsi:type="tool_1:Unset" featureName="exclude" elementExpression="var:source"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="exclude" valueExpression="aql:target"/>
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:source">
+                    <subModelOperations xsi:type="tool_1:Unset" featureName="exclude" elementExpression="var:element"/>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:target">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="exclude" valueExpression="aql:element"/>
+                  </subModelOperations>
+                </firstModelOperations>
+              </initialOperation>
+              <edgeView name="edgeView"/>
+            </tools>
+          </ownedTools>
+        </toolSections>
       </additionalLayers>
     </ownedRepresentations>
     <ownedRepresentations xsi:type="description_1:DiagramDescription" dropDescriptions="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.6 //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.8" name="pn-150" domainClass="PNPL::PetriNet" enablePopupBars="true">
