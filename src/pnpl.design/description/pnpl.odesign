@@ -44,7 +44,7 @@
           </style>
         </edgeMappings>
         <edgeMappings name="ANDMandatory-Relation" deletionDescription="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.1" semanticCandidatesExpression="aql:self.relations->select(p | p.type = PNPL::RelationType::AND)" sourceMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@nodeMappings[name='MandatoryNode'] //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@nodeMappings[name='OptionalNode']" targetMapping="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@nodeMappings[name='MandatoryNode']" targetFinderExpression="feature:Childs" sourceFinderExpression="feature:Parent" domainClass="PNPL::Relation" useDomainElement="true" reconnections="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.3 //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='Feature%20Model']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.4">
-          <style targetArrow="FillDiamond" sizeComputationExpression="2" endsCentering="Both">
+          <style targetArrow="FillDiamond" sizeComputationExpression="2">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
           </style>
         </edgeMappings>
