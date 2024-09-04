@@ -439,6 +439,12 @@
         <ownedRules xsi:type="validation:SemanticValidationRule" name="Not empty" level="ERROR" message="Must have at least one associated element." targetClass="PNPL::PresenceCondition">
           <audits auditExpression="aql:self.eContainer().pn_150.elements->exists(e | e.presenceCondition = self)"/>
         </ownedRules>
+        <ownedRules xsi:type="validation:SemanticValidationRule" name="Duplicated ArcTP" level="ERROR" message="Dupplicated ArcTP, same source and target" targetClass="PNPL::ArcTP">
+          <audits auditExpression="aql:self.eContainer().elements->select(e | e.oclIsTypeOf(PNPL::ArcTP) and e &lt;> self and e.source = self.source and e.target = self.target)->isEmpty()"/>
+        </ownedRules>
+        <ownedRules xsi:type="validation:SemanticValidationRule" name="Duplicated ArcPT" level="ERROR" message="Dupplicated ArcPT, same source and target" targetClass="PNPL::ArcPT">
+          <audits auditExpression="aql:self.eContainer().elements->select(e | e.oclIsTypeOf(PNPL::ArcPT) and e &lt;> self and e.source = self.source and e.target = self.target)->isEmpty()"/>
+        </ownedRules>
       </validationSet>
       <defaultLayer name="Components" label="Components">
         <nodeMappings name="Place" deletionDescription="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.3" labelDirectEdit="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.0" semanticCandidatesExpression="aql:self.eContainer().pn_150.elements->select(e | e.presenceCondition = null)" domainClass="PNPL::Place">
@@ -604,13 +610,15 @@
             <sourceViewVariable name="sourceView"/>
             <targetViewVariable name="targetView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.eContainer()">
-                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::ArcTP" referenceName="elements">
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="source" valueExpression="var:source"/>
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="target" valueExpression="var:target"/>
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="weight" valueExpression="1"/>
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:self.source.name+'-'+self.target.name"/>
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="presenceCondition" valueExpression="aql:self.source.presenceCondition"/>
+              <firstModelOperations xsi:type="tool_1:If" conditionExpression="aql:self.eContainer().elements->select(e | e.oclIsTypeOf(PNPL::ArcTP) and e.source = source and e.target = target)->isEmpty()">
+                <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.eContainer()">
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::ArcTP" referenceName="elements">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="source" valueExpression="var:source"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="target" valueExpression="var:target"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="weight" valueExpression="1"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:self.source.name+'-'+self.target.name"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="presenceCondition" valueExpression="aql:self.source.presenceCondition"/>
+                  </subModelOperations>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>
@@ -621,13 +629,15 @@
             <sourceViewVariable name="sourceView"/>
             <targetViewVariable name="targetView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.eContainer()">
-                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::ArcPT" referenceName="elements">
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="source" valueExpression="var:source"/>
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="target" valueExpression="var:target"/>
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="weight" valueExpression="1"/>
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:self.source.name+'-'+self.target.name"/>
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="presenceCondition" valueExpression="aql:self.target.presenceCondition"/>
+              <firstModelOperations xsi:type="tool_1:If" conditionExpression="aql:self.eContainer().elements->select(e | e.oclIsTypeOf(PNPL::ArcPT) and e.source = source and e.target = target)->isEmpty()">
+                <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.eContainer()">
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="PNPL::ArcPT" referenceName="elements">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="source" valueExpression="var:source"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="target" valueExpression="var:target"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="weight" valueExpression="1"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:self.source.name+'-'+self.target.name"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="presenceCondition" valueExpression="aql:self.target.presenceCondition"/>
+                  </subModelOperations>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>
