@@ -421,9 +421,9 @@
       </ownedCreateLine>
       <ownedColumnMappings name="Expression" headerLabelExpression="Expression" canEdit="true" featureName="expression" labelExpression="aql:self.expression.parseExpression()"/>
     </ownedRepresentations>
-    <ownedRepresentations xsi:type="description_1:DiagramDescription" dropDescriptions="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.6 //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.8" name="pn-150" domainClass="PNPL::PetriNet" enablePopupBars="true">
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" dropDescriptions="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.6 //@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.8" name="pn-150" initialisation="true" domainClass="PNPL::PetriNet" enablePopupBars="true">
       <metamodel href="http://www.petrinets.org/#/"/>
-      <validationSet>
+      <validationSet name="PetriNet">
         <ownedRules xsi:type="validation:SemanticValidationRule" name="Same Name" level="ERROR" message="Name must be unique." targetClass="PNPL::Element">
           <audits auditExpression="aql:self.eContainer().elements->select(n | n.name = self.name)->size() = 1"/>
         </ownedRules>
