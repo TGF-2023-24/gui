@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PNPL:pnpl xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:PNPL="http://www.petrinets.org/">
   <pn_150>
-    <elements xsi:type="PNPL:Place" name="p_start"/>
-    <elements xsi:type="PNPL:Place" presenceCondition="SolidPC" name="p_solid"/>
+    <elements xsi:type="PNPL:Place" name="p_start" tokens="6"/>
+    <elements xsi:type="PNPL:Place" presenceCondition="SolidPC" name="p_solid" tokens="6"/>
     <elements xsi:type="PNPL:Place" presenceCondition="CoffeePC" name="p_coffee"/>
     <elements xsi:type="PNPL:Place" presenceCondition="CoffeePC" name="p_coffee_end"/>
     <elements xsi:type="PNPL:Place" presenceCondition="BeveragePC" name="p_beverage"/>
@@ -56,12 +56,7 @@
     <elements xsi:type="PNPL:ArcTP" presenceCondition="TeaPC" name="a_tea_end_out" source="t_tea_end" target="p_cup"/>
     <elements xsi:type="PNPL:ArcPT" name="a_end_in" source="p_end" target="t_end"/>
     <elements xsi:type="PNPL:ArcTP" name="a_end_out" source="t_end" target="p_start"/>
-    <elements xsi:type="PNPL:ArcPT" source="p_beverage_end" target="t_beverage_end"/>
-    <elements xsi:type="PNPL:ArcPT"/>
-    <elements xsi:type="PNPL:Transition" name="t_11"/>
-    <elements xsi:type="PNPL:Place" name="p_12"/>
-    <elements xsi:type="PNPL:Transition" name="t_12"/>
-    <elements xsi:type="PNPL:Place" name="p_13"/>
+    <elements xsi:type="PNPL:ArcPT" name="beverage_end" source="p_beverage_end" target="t_beverage_end"/>
   </pn_150>
   <featuremodel>
     <nodes name="VendingMachine"/>
@@ -73,18 +68,12 @@
     <nodes name="Coffee" requires="VendingMachine Container Beverage"/>
     <nodes name="Sugar" requires="VendingMachine Supplement Beverage Container"/>
     <nodes name="Milk" requires="VendingMachine Supplement Coffee Container"/>
-    <nodes name="Node10" requires="VendingMachine Container Supplement"/>
+    <nodes name="Node10" requires="VendingMachine Supplement Beverage Container Sugar"/>
     <relations Parent="VendingMachine" Childs="Container Supplement"/>
     <relations Parent="Container" Childs="Beverage Solid" type="OR"/>
     <relations Parent="Beverage" Childs="Tea Coffee" type="OR"/>
     <relations Parent="Supplement" Childs="Sugar Milk" type="OR"/>
-    <relations/>
-    <relations/>
-    <relations/>
-    <relations/>
-    <relations/>
-    <relations Parent="Supplement" Childs="Sugar"/>
-    <relations Parent="Supplement" Childs="Node10"/>
+    <relations Parent="Sugar" Childs="Node10" type="OR"/>
   </featuremodel>
   <presencecondition id="SolidPC">
     <expression xsi:type="PNPL:Feature" feature="Solid"/>

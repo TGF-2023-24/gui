@@ -433,13 +433,13 @@
         <ownedRules xsi:type="validation:SemanticValidationRule" name="Positive Tokens" level="ERROR" message="Number of tokens cannot be less than 0." targetClass="PNPL::Place">
           <audits auditExpression="aql:self.tokens >= 0"/>
         </ownedRules>
-        <ownedRules xsi:type="validation:SemanticValidationRule" name="Positive Weight" level="ERROR" message="The value must be 1 or greater." targetClass="PNPL::Arc">
+        <ownedRules xsi:type="validation:SemanticValidationRule" name="Positive Weight" level="ERROR" message="The weight value must be 1 or greater." targetClass="PNPL::Arc">
           <audits auditExpression="aql:self.weight >0"/>
         </ownedRules>
         <ownedRules xsi:type="validation:SemanticValidationRule" name="Not empty" level="ERROR" message="Must have at least one associated element." targetClass="PNPL::PresenceCondition">
           <audits auditExpression="aql:self.eContainer().pn_150.elements->exists(e | e.presenceCondition = self)"/>
         </ownedRules>
-        <ownedRules xsi:type="validation:SemanticValidationRule" name="Duplicated ArcTP" level="ERROR" message="Dupplicated ArcTP, same source and target" targetClass="PNPL::ArcTP">
+        <ownedRules xsi:type="validation:SemanticValidationRule" name="Duplicated ArcTP" level="ERROR" message="Duplicated ArcTP, same source and target" targetClass="PNPL::ArcTP">
           <audits auditExpression="aql:self.eContainer().elements->select(e | e.oclIsTypeOf(PNPL::ArcTP) and e &lt;> self and e.source = self.source and e.target = self.target)->isEmpty()"/>
         </ownedRules>
         <ownedRules xsi:type="validation:SemanticValidationRule" name="Duplicated ArcPT" level="ERROR" message="Dupplicated ArcPT, same source and target" targetClass="PNPL::ArcPT">
