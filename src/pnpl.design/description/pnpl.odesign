@@ -491,7 +491,7 @@
           </conditionnalStyles>
         </nodeMappings>
         <nodeMappings name="Transition" deletionDescription="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.4" labelDirectEdit="//@ownedViewpoints[name='pnpl-1']/@ownedRepresentations[name='pn-150']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit']/@tools.0" semanticCandidatesExpression="aql:self.eContainer().pn_150.elements->select(e | e.presenceCondition = null)" domainClass="PNPL::Transition">
-          <style xsi:type="style:SquareDescription" showIcon="false" resizeKind="NSEW" width="3" height="7">
+          <style xsi:type="style:SquareDescription" showIcon="false" labelAlignment="RIGHT" resizeKind="NSEW" width="3" height="7">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
